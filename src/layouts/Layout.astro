@@ -1,0 +1,107 @@
+---
+import "@fontsource-variable/dm-sans";
+import "@fontsource-variable/bodoni-moda";
+import "@fontsource-variable/bodoni-moda/wght-italic.css";
+import "../styles/global.css";
+import { url, email, linkedin, github } from "../data/site";
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "Tarun Abraham — Developer, speaker & curious person",
+  description = "The work and interests of Tarun Abraham, a Year 13 student in Dubai. Software, speaking, student leadership, music, and ideas in progress.",
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const active = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f3f0e8" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={url("favicon.svg")} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta
+      property="og:image"
+      content={new URL(url("images/social.jpg"), Astro.site)}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Skip to content
+    </a>
+    <header class="site-header wrap">
+      <a class="wordmark" href={url()} aria-label="Tarun Abraham, home">
+        ta<span aria-hidden="true">↗</span>
+      </a>
+      <span class="header-note mono">
+        A personal collection
+        <br />
+        Dubai, UAE · <time data-dubai>UTC +4</time>
+      </span>
+      <nav aria-label="Main navigation">
+        <a
+          href={url("#work")}
+          aria-current={active.includes("/work/") ? "page" : undefined}
+        >
+          Work<span>03</span>
+        </a>
+        <a
+          href={url("about/")}
+          aria-current={active.includes("/about") ? "page" : undefined}
+        >
+          About
+        </a>
+        <a
+          href={url("lab/")}
+          aria-current={active.includes("/lab") ? "page" : undefined}
+        >
+          Lab
+        </a>
+        <a class="nav-contact" href={url("#contact")}>
+          Say hello <span aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <footer id="contact" class="site-footer">
+      <div class="wrap">
+        <div class="section-label">
+          <span>Keep the conversation going</span>
+          <span>Always curious</span>
+        </div>
+        <a class="hello" href={`mailto:${email}`}>
+          Let’s talk<span aria-hidden="true">↗</span>
+        </a>
+        <div class="footer-bottom">
+          <a href={`mailto:${email}`}>{email}</a>
+          <div>
+            <a href={github}>GitHub ↗</a>
+            <a href={linkedin}>LinkedIn ↗</a>
+            <a href={url("about/")}>More about me ↗</a>
+          </div>
+        </div>
+        <div class="colophon mono">
+          <span>Tarun Abraham © {new Date().getFullYear()}</span>
+          <span>Made with curiosity. Dubai, UAE.</span>
+          <a href="#top">Back to top ↑</a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      import "../scripts/site";
+    </script>
+  </body>
+</html>

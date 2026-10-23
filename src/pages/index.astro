@@ -1,0 +1,251 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectArt from "../components/ProjectArt.astro";
+import { projects, url, talk } from "../data/site";
+---
+
+<Layout>
+  <section id="top" class="hero wrap">
+    <div class="section-label">
+      <span>Student by day. Curious by default.</span>
+      <span>Portfolio / 2026</span>
+    </div>
+    <div class="hero-stage">
+      <h1>
+        Tarun
+        <br />
+        <em>Abraham</em>
+        <span class="hero-period">.</span>
+      </h1>
+      <figure class="hero-photo">
+        <img
+          src={url("images/tedx.webp")}
+          alt="Tarun receiving recognition on the TEDxAl Diyafah High School stage"
+          width="1380"
+          height="965"
+          fetchpriority="high"
+        />
+        <figcaption>
+          <span>Ideas belong outside your head.</span>
+          <span>TEDxAl Diyafah High School ↗</span>
+        </figcaption>
+      </figure>
+      <span class="photo-note mono" aria-hidden="true">
+        Also found
+        <br />
+        off-screen ↙
+      </span>
+    </div>
+    <div class="hero-bottom">
+      <p>
+        I build things, ask questions,
+        <br />
+        and occasionally take the mic.
+      </p>
+      <p class="hero-bio">
+        A Year 13 student in Dubai, exploring the space between technology,
+        people, and what comes next.
+      </p>
+      <a class="circle-link" href="#work" aria-label="Explore selected work">
+        ↓
+      </a>
+    </div>
+    <div class="hero-index mono">
+      <span>Developer</span>
+      <span>Speaker</span>
+      <span>Student leader</span>
+      <span>Vocalist</span>
+      <span>Still figuring things out ↗</span>
+    </div>
+  </section>
+
+  <section id="work" class="work-section wrap">
+    <div class="section-label">
+      <span>01 / Selected work</span>
+      <span>Built & being built</span>
+    </div>
+    <div class="section-heading">
+      <h2>
+        Curiosity,
+        <br />
+        <em>put to work.</em>
+      </h2>
+      <p>
+        Different questions. Different mediums.
+        <br />A few things I’ve been working on.
+      </p>
+    </div>
+    {projects.map((project, i) => (
+      <article class:list={["project", `project-${i}`]}>
+        <a
+          class="project-visual"
+          href={url(`work/${project.slug}/`)}
+          aria-label={`Read the ${project.name} case study`}
+        >
+          <ProjectArt
+            slug={project.slug}
+            image={project.image}
+            alt={project.alt}
+          />
+          <span class="visual-cta">
+            Inside the project <span aria-hidden="true">↗</span>
+          </span>
+        </a>
+        <div class="project-caption">
+          <span class="project-number mono">/{project.number}</span>
+          <div>
+            <p class="eyebrow">{project.category}</p>
+            <h3>
+              <a href={url(`work/${project.slug}/`)}>
+                {project.name}
+                <span aria-hidden="true"> ↗</span>
+              </a>
+            </h3>
+            <p>{project.line}</p>
+          </div>
+          <span class="project-status mono">
+            <i
+              class:list={[
+                "status-dot",
+                { "in-progress": project.slug === "margin" },
+              ]}
+            ></i>
+            {project.status}
+          </span>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="speaking-section" id="speaking">
+    <div class="wrap">
+      <div class="section-label">
+        <span>02 / Beyond the keyboard</span>
+        <span>Ideas → conversations → action</span>
+      </div>
+      <div class="speaking-heading">
+        <h2>
+          Some ideas
+          <br />
+          need a <em>voice.</em>
+        </h2>
+        <p>
+          Speaking, bringing people together,
+          <br />
+          and learning to lead by doing.
+        </p>
+      </div>
+      <div class="talk-feature">
+        <a href={talk} class="talk-photo">
+          <img
+            src={url("images/tedx.webp")}
+            alt="Tarun on the TEDxAl Diyafah High School stage"
+            loading="lazy"
+            width="1380"
+            height="965"
+          />
+          <span class="play-link">
+            Watch the talk <span aria-hidden="true">↗</span>
+          </span>
+        </a>
+        <div class="talk-copy">
+          <p class="eyebrow">TEDxAl Diyafah High School</p>
+          <h3>
+            Between Creation
+            <br />
+            and Becoming
+          </h3>
+          <p>
+            How artificial intelligence is growing faster than we can control. A
+            talk about the responsibility that comes with building powerful
+            systems.
+          </p>
+          <a class="text-link" href={talk}>
+            Watch on TEDx Talks <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+      <div class="leadership-list">
+        <a href={url("about/#leadership")}>
+          <span class="mono">01</span>
+          <div>
+            <h3>Model United Nations</h3>
+            <p>Delegate, co-chair & appointed ADMUN 2.7 Logistics Manager</p>
+          </div>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a href={url("about/#leadership")}>
+          <span class="mono">02</span>
+          <div>
+            <h3>Entrepreneurial Club</h3>
+            <p>Founding core member · NextGen Entrepreneurial League</p>
+          </div>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a href={url("about/#leadership")}>
+          <span class="mono">03</span>
+          <div>
+            <h3>Student leadership</h3>
+            <p>Student council · service learning · investment team</p>
+          </div>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-teaser wrap">
+    <div class="section-label">
+      <span>03 / The person behind the projects</span>
+      <span>More than a browser tab</span>
+    </div>
+    <div class="about-teaser-content">
+      <span class="asterisk" aria-hidden="true">
+        ✳
+      </span>
+      <div>
+        <h2>
+          Code is one part
+          <br />
+          of the <em>picture.</em>
+        </h2>
+        <p>
+          I’m also a vocalist, a MUN enthusiast, and someone who likes finding
+          out how things work. The interesting part is where those worlds meet.
+        </p>
+        <a class="text-link" href={url("about/")}>
+          A little more about me <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lab-teaser wrap">
+    <div>
+      <p class="eyebrow">The lab / small ideas, real experiments</p>
+      <h2>
+        “What if
+        <br />I tried <em>this?</em>”
+      </h2>
+      <a class="text-link" href={url("lab/")}>
+        Step inside the lab <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <a
+      class="lab-stamp"
+      href={url("lab/")}
+      aria-label="Explore the experimental Lab"
+    >
+      <span class="mono">Experiment № 01</span>
+      <div class="barcode-mark" aria-hidden="true"></div>
+      <span>
+        One QR code.
+        <br />
+        Another kind of code.
+      </span>
+      <span class="stamp-arrow" aria-hidden="true">
+        ↗
+      </span>
+    </a>
+  </section>
+</Layout>
