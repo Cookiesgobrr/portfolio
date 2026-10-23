@@ -3,7 +3,7 @@ import "@fontsource-variable/dm-sans";
 import "@fontsource-variable/bodoni-moda";
 import "@fontsource-variable/bodoni-moda/wght-italic.css";
 import "../styles/global.css";
-import { url, email, linkedin, github } from "../data/site";
+import { url, email, linkedin, github, projects } from "../data/site";
 interface Props {
   title?: string;
   description?: string;
@@ -54,7 +54,7 @@ const active = Astro.url.pathname;
           href={url("#work")}
           aria-current={active.includes("/work/") ? "page" : undefined}
         >
-          Work<span>03</span>
+          Work<span>{String(projects.length).padStart(2, "0")}</span>
         </a>
         <a
           href={url("about/")}
@@ -79,8 +79,7 @@ const active = Astro.url.pathname;
     <footer id="contact" class="site-footer">
       <div class="wrap">
         <div class="section-label">
-          <span>Keep the conversation going</span>
-          <span>Always curious</span>
+          <span>I’d love to work with like-minded people.</span>
         </div>
         <a class="hello" href={`mailto:${email}`}>
           Let’s talk<span aria-hidden="true">↗</span>
