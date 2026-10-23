@@ -1,0 +1,49 @@
+---
+import { url } from "../data/site";
+interface Props {
+  slug: string;
+  image?: string;
+  alt?: string;
+}
+const { slug, image, alt = "" } = Astro.props;
+---
+
+<div class:list={["project-art", slug]}>
+  {image ? (
+    <div class="screen-frame">
+      <div class="screen-bar" aria-hidden="true">
+        <i></i>
+        <i></i>
+        <i></i>
+        <span>
+          {slug === "tacticlens"
+            ? "TacticLens Live / match studio"
+            : "EpilEducate / first aid"}
+        </span>
+      </div>
+      <img
+        src={url(`images/${image}`)}
+        alt={alt}
+        loading="lazy"
+        width={slug === "tacticlens" ? 1348 : 1366}
+        height={slug === "tacticlens" ? 926 : 1024}
+      />
+    </div>
+  ) : (
+    <div
+      class="margin-art"
+      aria-label="Margin, an iPad notebook project in development"
+    >
+      <span class="mono">A project in progress</span>
+      <p>
+        Room
+        <br />
+        to <em>think.</em>
+      </p>
+      <div class="notebook-lines" aria-hidden="true"></div>
+      <span class="margin-word">
+        Margin<span>↗</span>
+      </span>
+    </div>
+  )}
+</div>

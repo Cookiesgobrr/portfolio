@@ -1,0 +1,220 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Lab — Tarun Abraham"
+  description="Small experiments in code, automation, and hardware by Tarun Abraham. Try an interactive barcode generator and explore the projects behind it."
+>
+  <div id="top" class="wrap">
+    <section class="page-intro lab-intro">
+      <div class="section-label">
+        <span>The experimental department</span>
+        <span>No grand plan required</span>
+      </div>
+      <h1>
+        For the
+        <br />
+        <em>“what if?”</em>
+      </h1>
+      <p class="intro-text">
+        Small tools, side quests, and things I wanted to understand by taking
+        them apart. Some useful. Some just because.
+      </p>
+    </section>
+    <div class="lab-filter" role="group" aria-label="Filter experiments">
+      <button data-filter="all" aria-pressed="true">
+        Everything / 03
+      </button>
+      <button data-filter="code" aria-pressed="false">
+        Code
+      </button>
+      <button data-filter="automation" aria-pressed="false">
+        Automation
+      </button>
+      <button data-filter="hardware" aria-pressed="false">
+        Hardware
+      </button>
+    </div>
+    <p class="sr-only" data-filter-count role="status" aria-live="polite">
+      Showing 3 experiments.
+    </p>
+    <section class="lab-experiment" data-category="code">
+      <div class="experiment-text">
+        <p class="eyebrow">Experiment 01 / Code / Built</p>
+        <h2>
+          A barcode generator.
+          <br />
+          Inside a QR code.
+        </h2>
+        <p>
+          For Hack Club’s Say Cheese challenge, I made a tiny HTML barcode
+          generator that could fit into a QR code. One kind of code making
+          another felt like a good place to start.
+        </p>
+        <p>
+          A version of the generator is here to try. The original experiment is
+          on GitHub.
+        </p>
+        <a
+          class="text-link"
+          href="https://github.com/Cookiesgobrr/barcodeqrysws"
+        >
+          See the original <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <form class="experiment-demo" id="barcode-form">
+        <label for="barcode-input">Turn a little text into CODE128</label>
+        <input
+          id="barcode-input"
+          name="text"
+          type="text"
+          value="HELLO, WORLD"
+          maxlength="32"
+          pattern="[ -~]+"
+          required
+          aria-describedby="barcode-help"
+        />
+        <span id="barcode-help" class="mono">
+          1–32 printable ASCII characters · processed here
+        </span>
+        <button type="submit">Make a barcode ↗</button>
+        <div class="barcode-output">
+          <svg
+            id="barcode"
+            role="img"
+            aria-label="Barcode for HELLO, WORLD"
+          ></svg>
+        </div>
+        <p
+          class="feedback"
+          id="barcode-feedback"
+          role="status"
+          aria-live="polite"
+        ></p>
+        <noscript>Enable JavaScript to try the barcode generator.</noscript>
+      </form>
+    </section>
+    <section class="lab-experiment" data-category="automation">
+      <div class="experiment-text">
+        <p class="eyebrow">Experiment 02 / Automation / Built</p>
+        <h2>
+          Now playing,
+          <br />
+          now in Teams.
+        </h2>
+        <p>
+          I built a Power Automate flow connecting Spotify and Microsoft Teams.
+          Every two minutes, it checked what I was listening to and updated my
+          Teams status with the track.
+        </p>
+        <p>
+          A small project in making two systems talk to each other. This is a
+          past experiment, not a live feed of my listening activity.
+        </p>
+      </div>
+      <div class="experiment-flow">
+        <div
+          class="flow-type"
+          aria-label="Spotify to Power Automate to Microsoft Teams"
+        >
+          <span>Spotify</span>
+          <i aria-hidden="true">→</i>
+          <span>
+            Power
+            <br />
+            Automate
+          </span>
+          <i aria-hidden="true">→</i>
+          <span>Teams</span>
+        </div>
+        <p class="mono">Track → request → status</p>
+      </div>
+    </section>
+    <section class="lab-experiment" data-category="hardware">
+      <div class="experiment-text">
+        <p class="eyebrow">Experiment 03 / Hardware / Built</p>
+        <h2>
+          An x86 laptop.
+          <br />A different OS.
+        </h2>
+        <p>
+          I configured a Hackintosh on a non-Apple laptop, working through
+          compatibility, kernel extensions, and system configuration to improve
+          stability.
+        </p>
+        <p>
+          It was a way to learn what sits underneath the operating system
+          interface: the parts you only start noticing when something stops
+          working.
+        </p>
+      </div>
+      <div class="experiment-aside">
+        <span class="mono">A hardware learning project</span>
+        <p class="big-type">
+          Boot.
+          <br />
+          Break.
+          <br />
+          <em>Understand.</em>
+        </p>
+        <span class="small">Compatibility is a surprisingly good teacher.</span>
+      </div>
+    </section>
+  </div>
+  <script>
+    import JsBarcode from "jsbarcode";
+    const form = document.querySelector<HTMLFormElement>("#barcode-form");
+    const input = document.querySelector<HTMLInputElement>("#barcode-input");
+    const feedback = document.querySelector<HTMLElement>("#barcode-feedback");
+    const svg = document.querySelector<SVGSVGElement>("#barcode");
+    function renderBarcode() {
+      if (!input || !svg || !feedback) return;
+      if (!/^[\x20-\x7E]{1,32}$/.test(input.value)) {
+        feedback.textContent = "Use 1–32 printable ASCII characters.";
+        return;
+      }
+      try {
+        JsBarcode(svg, input.value, {
+          format: "CODE128",
+          width: 1.4,
+          height: 55,
+          fontSize: 12,
+          margin: 10,
+          background: "#f3f0e8",
+          lineColor: "#20231f",
+        });
+        svg.setAttribute("aria-label", `CODE128 barcode for ${input.value}`);
+        feedback.textContent = "Made locally. Your text stays in this browser.";
+      } catch {
+        feedback.textContent =
+          "That text could not be encoded. Try another value.";
+      }
+    }
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      renderBarcode();
+    });
+    renderBarcode();
+    const filters =
+      document.querySelectorAll<HTMLButtonElement>("[data-filter]");
+    const items = document.querySelectorAll<HTMLElement>("[data-category]");
+    filters.forEach((button) =>
+      button.addEventListener("click", () => {
+        filters.forEach((filter) =>
+          filter.setAttribute("aria-pressed", String(filter === button)),
+        );
+        let count = 0;
+        items.forEach((item) => {
+          item.hidden =
+            button.dataset.filter !== "all" &&
+            item.dataset.category !== button.dataset.filter;
+          if (!item.hidden) count++;
+        });
+        const status = document.querySelector("[data-filter-count]");
+        if (status)
+          status.textContent = `Showing ${count} experiment${count === 1 ? "" : "s"}.`;
+      }),
+    );
+  </script>
+</Layout>
