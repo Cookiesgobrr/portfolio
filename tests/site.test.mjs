@@ -84,7 +84,7 @@ test("CSS font and media references exist in the production bundle", () => {
   }
 });
 
-test("repository stays minimal and development work stays clearly labeled", () => {
+test("repository stays minimal and unreleased work stays unpublished", () => {
   assert.equal(readFileSync("README.md", "utf8"), "# portfolio\n");
   assert.deepEqual(
     files(".").filter(
@@ -94,8 +94,13 @@ test("repository stays minimal and development work stays clearly labeled", () =
     ),
     ["README.md"],
   );
-  const margin = readFileSync("dist/work/margin/index.html", "utf8");
-  assert.match(margin, /In development/);
-  assert.match(margin, /has not been submitted/);
-  assert.ok(!margin.includes("github.com/Cookiesgobrr/Margin"));
+  assert.ok(!existsSync("dist/work/margin/index.html"));
+  for (const path of files("dist").filter((path) =>
+    /\.(html|xml)$/.test(path),
+  )) {
+    assert.doesNotMatch(
+      readFileSync(path, "utf8"),
+      /(?:>Margin<|work\/margin\/|iPad notebook project in development)/,
+    );
+  }
 });
