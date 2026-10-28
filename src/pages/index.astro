@@ -46,9 +46,19 @@ import { projects, url, talk } from "../data/site";
         Director of Logistics at ADMUN 2.7. This is a collection of what I’m
         building, learning, and getting involved in.
       </p>
-      <a class="circle-link" href="#work" aria-label="Explore selected work">
-        ↓
-      </a>
+      <div class="hero-actions">
+        <a
+          class="resume-button"
+          href={url("files/tarun-abraham-resume.pdf")}
+          download="Tarun-Abraham-Resume.pdf"
+          data-resume-trigger
+        >
+          Resume <span aria-hidden="true">↘</span>
+        </a>
+        <a class="circle-link" href="#work" aria-label="Explore selected work">
+          ↓
+        </a>
+      </div>
     </div>
     <div class="hero-index mono">
       <span>Developer</span>
