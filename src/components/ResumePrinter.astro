@@ -1,0 +1,90 @@
+---
+import { url } from "../data/site";
+---
+
+<dialog
+  class="resume-dialog"
+  aria-labelledby="resume-title"
+  aria-describedby="resume-description"
+  data-resume-dialog
+>
+  <div class="press-header">
+    <span class="eyebrow">TA / Document press</span>
+    <button
+      class="press-close"
+      type="button"
+      data-resume-close
+      aria-label="Close resume printer"
+      autofocus
+    >
+      Close <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="press-intro">
+    <h2 id="resume-title">
+      A little about me.
+      <br />
+      <em>On paper.</em>
+    </h2>
+    <p id="resume-description">One résumé, coming right up.</p>
+  </div>
+  <div class="press-scene" aria-hidden="true">
+    <div class="press-details">
+      <span class="detail-slip slip-one">Tarun Abraham</span>
+      <span class="detail-slip slip-two">Swift &amp; TypeScript</span>
+      <span class="detail-slip slip-three">TEDx speaker</span>
+      <span class="detail-slip slip-four">Student leadership</span>
+      <span class="detail-slip slip-five">TacticLens Live</span>
+      <span class="detail-slip slip-six">EpilEducate</span>
+    </div>
+    <div class="press-paper-window">
+      <div class="press-paper">
+        <img
+          src={url("images/resume-preview.webp")}
+          width="595"
+          height="842"
+          alt="Preview of Tarun Abraham’s one-page résumé"
+          loading="lazy"
+        />
+      </div>
+    </div>
+    <div class="press-machine">
+      <div class="press-intake"></div>
+      <div class="press-machine-top">
+        <span>TA—01</span>
+        <i class="press-light"></i>
+      </div>
+      <div class="press-display">
+        <span data-press-display>READY TO COMPOSE</span>
+        <span class="press-meter">
+          <i></i>
+        </span>
+      </div>
+      <div class="press-machine-bottom">
+        <span>PERSONAL EDITION</span>
+        <span class="press-rollers">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+      </div>
+      <div class="press-output"></div>
+    </div>
+  </div>
+  <div class="press-bottom">
+    <p class="press-status" role="status" aria-live="polite" data-resume-status>
+      Gathering the details…
+    </p>
+    <a
+      class="press-direct"
+      href={url("files/tarun-abraham-resume.pdf")}
+      download="Tarun-Abraham-Resume.pdf"
+      data-resume-direct
+    >
+      Skip animation &amp; download <span aria-hidden="true">↓</span>
+    </a>
+  </div>
+</dialog>
+<script>
+  import "../scripts/resume-printer";
+</script>

@@ -672,6 +672,7 @@ h2 {
 }
 .footer-bottom > div {
   display: flex;
+  flex-wrap: wrap;
   gap: 28px;
 }
 .footer-bottom a:hover {
