@@ -39,12 +39,11 @@ import { projects, url, talk } from "../data/site";
     </div>
     <div class="hero-bottom">
       <p class="hero-bio">
-        I’m Tarun, a Year 13 student in Dubai. I build apps and small tools,
-        explore AI and cybersecurity, and enjoy figuring out how systems work.
-        Outside development, I’m a TEDx speaker, vocalist, and active MUN
-        participant. At school, I help run our Entrepreneurial Club and serve as
-        Director of Logistics at ADMUN 2.7. This is a collection of what I’m
-        building, learning, and getting involved in.
+        I get curious about systems, then build things to understand or improve
+        them. I’m Tarun, a Year 13 student in Dubai. That curiosity has led me
+        to an inspectable football match studio, a logistics system for the
+        conference I’m helping run, and my first Swift app. Away from the code,
+        I’m a TEDx speaker, vocalist, and a familiar face in MUN rooms.
       </p>
       <div class="hero-actions">
         <a
@@ -61,7 +60,7 @@ import { projects, url, talk } from "../data/site";
       </div>
     </div>
     <div class="hero-index mono">
-      <span>Developer</span>
+      <span>Builder</span>
       <span>Speaker</span>
       <span>Student leader</span>
       <span>Vocalist</span>
@@ -77,12 +76,13 @@ import { projects, url, talk } from "../data/site";
         <em>put to work.</em>
       </h2>
       <p>
-        Different questions. Different mediums.
-        <br />A few things I’ve been working on.
+        A football studio, conference logistics,
+        <br />
+        and an interactive Swift playground.
       </p>
     </div>
-    {projects.map((project, i) => (
-      <article class:list={["project", `project-${i}`]}>
+    {projects.map((project) => (
+      <article class:list={["project", `project-${project.slug}`]}>
         <a
           class="project-visual"
           href={url(`work/${project.slug}/`)}
@@ -110,6 +110,9 @@ import { projects, url, talk } from "../data/site";
               </a>
             </h3>
             <p>{project.line}</p>
+            <p class="project-built">
+              <span>What I built</span> {project.contribution}
+            </p>
           </div>
           <span class="project-status mono">
             <i class="status-dot"></i>
@@ -129,9 +132,9 @@ import { projects, url, talk } from "../data/site";
           need a <em>voice.</em>
         </h2>
         <p>
-          Speaking, bringing people together,
+          Taking responsibility in a room,
           <br />
-          and learning to lead by doing.
+          and following through outside it.
         </p>
       </div>
       <div class="talk-feature">
@@ -165,30 +168,33 @@ import { projects, url, talk } from "../data/site";
         </div>
       </div>
       <div class="leadership-list">
-        <a href={url("about/#leadership")}>
+        <a href={url("work/admunos/")}>
           <span class="mono">01</span>
           <div>
-            <h3>Model United Nations</h3>
+            <h3>ADMUN 2.7 / Director of Logistics</h3>
             <p>
-              Avid MUNer, with multiple experiences as a delegate and chair.
-              Currently Director of Logistics at ADMUN 2.7.
+              Preparing the forthcoming conference’s logistics and building
+              admunOS to connect registration, check-in, and meals.
             </p>
           </div>
           <span aria-hidden="true">↗</span>
         </a>
-        <a href={url("about/#leadership")}>
+        <a href={url("about/#wharton")}>
           <span class="mono">02</span>
           <div>
-            <h3>Entrepreneurial Club</h3>
-            <p>Founding core member · NextGen Entrepreneurial League</p>
+            <h3>Wharton Global High School Investment Competition</h3>
+            <p>
+              Introduced it to my school and led our first team, developing
+              investment strategies against a client brief.
+            </p>
           </div>
           <span aria-hidden="true">↗</span>
         </a>
-        <a href={url("about/#leadership")}>
+        <a href={url("about/#sustainovation")}>
           <span class="mono">03</span>
           <div>
-            <h3>Student leadership</h3>
-            <p>Student council · service learning · investment team</p>
+            <h3>Sustainovation Challenge</h3>
+            <p>Entered the challenge and placed third.</p>
           </div>
           <span aria-hidden="true">↗</span>
         </a>

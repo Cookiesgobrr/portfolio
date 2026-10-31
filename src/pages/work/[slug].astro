@@ -44,6 +44,17 @@ const { project, next } = Astro.props;
       </dl>
     </div>
     <div class="case-body">
+      <section class="editorial-row case-contribution">
+        <p class="eyebrow">What I built</p>
+        <div class="body-copy">
+          <h2>My contribution</h2>
+          <ul class="contribution-list">
+            {project.built.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
       {project.sections.map((section, i) => (
         <section class="editorial-row">
           <p class="eyebrow">

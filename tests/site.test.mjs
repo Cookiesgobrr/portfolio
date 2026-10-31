@@ -12,6 +12,38 @@ function files(dir) {
 }
 const pages = files("dist").filter((path) => path.endsWith(".html"));
 
+test("selected work forms an ordered journey through three complete case studies", () => {
+  const home = readFileSync("dist/index.html", "utf8");
+  const work = home.slice(
+    home.indexOf('id="work"'),
+    home.indexOf('id="speaking"'),
+  );
+  const slugs = ["tacticlens", "admunos", "epileducate"];
+  let previous = -1;
+  slugs.forEach((slug, index) => {
+    const position = work.indexOf(`/portfolio/work/${slug}/`);
+    assert.ok(position > previous, `${slug}: missing or out of order`);
+    previous = position;
+    const page = readFileSync(`dist/work/${slug}/index.html`, "utf8");
+    assert.match(page, /<h2>My contribution<\/h2>/);
+    assert.match(page, /class="contribution-list"/);
+    const next = slugs[(index + 1) % slugs.length];
+    assert.ok(
+      page.includes(`class="next-project" href="/portfolio/work/${next}/"`),
+    );
+  });
+  assert.doesNotMatch(home, /admun-logistics-demo/);
+  assert.doesNotMatch(
+    readFileSync("dist/work/admunos/index.html", "utf8"),
+    /admun-logistics-demo/,
+  );
+  assert.ok(
+    readFileSync("dist/sitemap.xml", "utf8").includes(
+      "/portfolio/work/admunos/",
+    ),
+  );
+});
+
 test("every internal page, asset, and anchor resolves under /portfolio/", () => {
   for (const page of pages) {
     const html = readFileSync(page, "utf8");
