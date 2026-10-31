@@ -20,6 +20,13 @@ export const projects = [
       "The same match can mean something different to a fan, an analyst, or someone following one player. I’m building a match studio that makes those perspectives visible, while keeping every explanation tied to the action.",
     role: "Developer · simulation, interface & intelligence",
     stack: "TypeScript / React / Python / Microsoft Foundry",
+    contribution:
+      "The match simulation, replay interface, and evidence checks behind the commentary.",
+    built: [
+      "A seeded TypeScript engine for a fictional 11-a-side match, with stable event IDs and a shared replay timeline.",
+      "React/SVG and Three.js views, replay controls, player focus, and source-linked highlights drawn from that same timeline.",
+      "A Microsoft Foundry evidence-selection workflow, independent checks in Python and TypeScript, and replay-time JSON and caption exports.",
+    ],
     link: "https://cookiesgobrr.github.io/tacticlens-live/?seed=82",
     linkLabel: "Open the match studio",
     repo: "https://github.com/Cookiesgobrr/tacticlens-live",
@@ -47,8 +54,61 @@ export const projects = [
     ],
   },
   {
-    slug: "epileducate",
+    slug: "admunos",
     number: "02",
+    name: "admunOS",
+    category: "Conference logistics × connected workflows",
+    status: "In development · preparing for ADMUN 2.7",
+    year: "2026",
+    image: "",
+    alt: "admunOS system map: registration and payment review create a paid delegate record with one permanent ID, used for attendance and meal tracking through a staff scanner and server checks",
+    line: "The conference I’m helping run. The system I’m building for it.",
+    intro:
+      "I became Director of Logistics for ADMUN 2.7 and needed to connect registration, payment checks, and what happens at the door. I began building admunOS so the same delegate record could connect a verified payment to check-in and meal collection.",
+    role: "Developer · system design, backend & staff interface; Director of Logistics, ADMUN 2.7",
+    stack:
+      "JavaScript / Google Apps Script / Google Sheets / Netlify Functions",
+    contribution:
+      "The registration-to-delegate workflow, staff scanner, and backend record checks.",
+    built: [
+      "Registration imports and payment reconciliation in Google Apps Script, with a review step before paid delegates receive permanent IDs.",
+      "A browser-based staff directory and QR scanner with attendance and meal modes, manual ID entry, and clear approval, duplicate, and connection-error responses.",
+      "A server-side proxy and backend checks for staff access, limited response fields, and duplicate attendance and meal records.",
+    ],
+    link: "",
+    linkLabel: "",
+    repo: "",
+    sections: [
+      {
+        label: "The problem",
+        title: "One delegate, several separate lists.",
+        body: "Registration, payment verification, badges, attendance, and meals all depend on knowing who someone is and what has been confirmed. As I prepared for the logistics role, I wanted those steps to use the same record. Otherwise, every desk would have its own version of the answer.",
+      },
+      {
+        label: "The system",
+        title: "A permanent ID connects the steps.",
+        body: "Registration exports enter a signup database. A separate payment import is reviewed before uniquely matched, paid signups become operational delegate records. Only then does the system issue a permanent Delegate ID. Staff use that ID for directory lookup, QR check-in, attendance sessions, and meal collection. Reimports preserve logistics fields such as committee allocation and portfolio.",
+      },
+      {
+        label: "A technical decision",
+        title: "Two phones. One meal record.",
+        body: "A camera cooldown can stop repeat scans on one phone, but it cannot coordinate two desks. For attendance and meals, the backend takes a script-wide lock, rechecks the delegate-and-session or delegate-and-meal key, and writes and flushes the record before releasing the lock. A repeat returns an already-recorded result. The duplicate rule belongs where the record is written.",
+      },
+      {
+        label: "Staff access & privacy",
+        title: "The badge carries an ID.",
+        body: "The QR contains only the Delegate ID. Staff authenticate with a shared access code, and the server confirms each scan. A server-side proxy keeps backend credentials out of the browser, while responses limit fields to the particular staff workflow. The app caches its static shell, but does not cache delegate responses or queue unconfirmed writes as successful check-ins.",
+      },
+      {
+        label: "Where it stands",
+        title: "Built for a conference still ahead.",
+        body: "I’m preparing admunOS for the forthcoming ADMUN 2.7. The repository includes automated tests and a controlled workflow using fictional delegates. Venue-network, phone-camera, and multi-device checks are part of preparation before event-day use.",
+      },
+    ],
+  },
+  {
+    slug: "epileducate",
+    number: "03",
     name: "EpilEducate",
     category: "Swift × interactive learning",
     status: "2026 Swift Student Challenge submission",
@@ -60,6 +120,13 @@ export const projects = [
       "My first Swift app is an interactive playground about epilepsy. It brings together explanations, a visualization of brain activity, and a scenario about responding when someone has a seizure.",
     role: "Developer · concept, learning experience & Swift app",
     stack: "Swift / SwiftUI / Canvas / SpriteKit",
+    contribution:
+      "The SwiftUI learning flow, brain-wave visualization, and SpriteKit first-aid scenario.",
+    built: [
+      "The SwiftUI app and learning flow, connecting explanations of epilepsy with interactive exercises.",
+      "A custom Canvas brain-wave visualization, trigger controls, and haptic feedback alongside the visual experience.",
+      "A SpriteKit first-aid scenario with a briefing, interactive choices, and a results screen.",
+    ],
     link: "https://github.com/Cookiesgobrr/EpilEducate",
     linkLabel: "Explore the source",
     repo: "",
