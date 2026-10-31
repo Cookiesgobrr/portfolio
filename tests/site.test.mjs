@@ -127,6 +127,8 @@ test("repository stays minimal and unreleased work stays unpublished", () => {
     ["README.md"],
   );
   assert.ok(!existsSync("dist/work/margin/index.html"));
+  assert.ok(!existsSync("dist/__admun-preview"));
+  assert.ok(!existsSync("dist/responsive-check.html"));
   for (const path of files("dist").filter((path) =>
     /\.(html|xml)$/.test(path),
   )) {

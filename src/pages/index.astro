@@ -2,87 +2,59 @@
 import Layout from "../layouts/Layout.astro";
 import ProjectArt from "../components/ProjectArt.astro";
 import { projects, url, talk } from "../data/site";
+
+const summaries: Record<string, string> = {
+  tacticlens:
+    "A football match studio with 2D and 3D replays, different audience perspectives, and explanations you can trace back to the match events.",
+  admunos:
+    "I needed to manage logistics for ADMUN 2.7, so I started connecting registration, payment checks, delegate IDs, attendance, and meals in one system.",
+  epileducate:
+    "My first Swift app: an interactive playground about epilepsy, brain activity, and seizure first aid.",
+};
 ---
 
 <Layout>
   <section id="top" class="hero wrap">
-    <div class="section-label">
-      <span>Portfolio / 2026</span>
+    <div class="hero-heading">
+      <h1>Tarun Abraham</h1>
+      <p class="hero-location">Year 13 student in Dubai</p>
     </div>
-    <div class="hero-stage">
-      <h1>
-        Tarun
-        <br />
-        <em>Abraham</em>
-        <span class="hero-period">.</span>
-      </h1>
-      <figure class="hero-photo">
-        <img
-          src={url("images/tedx.webp")}
-          alt="Tarun receiving recognition on the TEDxAl Diyafah High School stage"
-          width="1380"
-          height="965"
-          fetchpriority="high"
-        />
-        <figcaption>
-          <a href="#tedx-talk">
-            My TEDx talk on keeping AI under human control. ↘
-          </a>
-          <span>TEDxAl Diyafah High School</span>
-        </figcaption>
-      </figure>
-      <span class="photo-note mono" aria-hidden="true">
-        Also found
-        <br />
-        off-screen ↙
-      </span>
-    </div>
-    <div class="hero-bottom">
-      <p class="hero-bio">
-        I get curious about systems, then build things to understand or improve
-        them. I’m Tarun, a Year 13 student in Dubai. That curiosity has led me
-        to an inspectable football match studio, a logistics system for the
-        conference I’m helping run, and my first Swift app. Away from the code,
-        I’m a TEDx speaker, vocalist, and a familiar face in MUN rooms.
+    <figure class="hero-photo">
+      <img
+        src={url("images/tedx.webp")}
+        alt="Tarun receiving recognition on the TEDxAl Diyafah High School stage"
+        width="1380"
+        height="965"
+        fetchpriority="high"
+      />
+      <figcaption>
+        <a href="#tedx-talk">At TEDxAl Diyafah</a>
+      </figcaption>
+    </figure>
+    <div class="hero-bio">
+      <p>
+        I build things to understand how they work, or to solve a problem in
+        front of me. Recently, that’s meant a football match studio, a
+        conference logistics system, and my first Swift app.
       </p>
-      <div class="hero-actions">
+      <p>I also speak, sing, and spend a fair amount of time in MUN rooms.</p>
+      <div class="hero-links">
         <a
-          class="resume-button"
           href={url("files/tarun-abraham-resume.pdf")}
           download="Tarun-Abraham-Resume.pdf"
           data-resume-trigger
         >
-          Resume <span aria-hidden="true">↘</span>
+          Resume
         </a>
-        <a class="circle-link" href="#work" aria-label="Explore selected work">
-          ↓
-        </a>
+        <a href={url("about/")}>More about me</a>
       </div>
-    </div>
-    <div class="hero-index mono">
-      <span>Builder</span>
-      <span>Speaker</span>
-      <span>Student leader</span>
-      <span>Vocalist</span>
-      <span>Still figuring things out ↗</span>
     </div>
   </section>
 
   <section id="work" class="work-section wrap">
-    <div class="section-heading">
-      <h2>
-        Curiosity,
-        <br />
-        <em>put to work.</em>
-      </h2>
-      <p>
-        A football studio, conference logistics,
-        <br />
-        and an interactive Swift playground.
-      </p>
-    </div>
+    <h2>Projects</h2>
     {projects.map((project) => (
-      <article class:list={["project", `project-${project.slug}`]}>
+      <article class="project">
         <a
           class="project-visual"
           href={url(`work/${project.slug}/`)}
@@ -93,147 +65,82 @@ import { projects, url, talk } from "../data/site";
             image={project.image}
             alt={project.alt}
           />
-          <span class="visual-cta">
-            Inside the project <span aria-hidden="true">↗</span>
-          </span>
         </a>
-        <div class="project-caption">
-          <span class="project-number mono">/{project.number}</span>
-          <div>
-            {project.slug !== "tacticlens" && (
-              <p class="eyebrow">{project.category}</p>
-            )}
-            <h3>
-              <a href={url(`work/${project.slug}/`)}>
-                {project.name}
-                <span aria-hidden="true"> ↗</span>
+        <div class="project-copy">
+          <h3>
+            <a href={url(`work/${project.slug}/`)}>{project.name}</a>
+          </h3>
+          <p class="project-status">{project.status}</p>
+          <p>{summaries[project.slug]}</p>
+          <p class="project-built">
+            <strong>My work:</strong> {project.contribution}
+          </p>
+          <div class="project-links">
+            <a href={url(`work/${project.slug}/`)}>Read case study</a>
+            {project.link && (
+              <a href={project.link}>
+                {project.slug === "tacticlens" ? "Try the demo" : "View source"}
               </a>
-            </h3>
-            <p>{project.line}</p>
-            <p class="project-built">
-              <span>What I built</span> {project.contribution}
-            </p>
+            )}
           </div>
-          <span class="project-status mono">
-            <i class="status-dot"></i>
-            {project.status}
-          </span>
         </div>
       </article>
     ))}
   </section>
 
-  <section class="speaking-section" id="speaking">
-    <div class="wrap">
-      <div class="speaking-heading">
-        <h2>
-          Some ideas
-          <br />
-          need a <em>voice.</em>
-        </h2>
-        <p>
-          Taking responsibility in a room,
-          <br />
-          and following through outside it.
-        </p>
-      </div>
-      <div class="talk-feature">
-        <a href={talk} class="talk-photo">
-          <img
-            src={url("images/tedx.webp")}
-            alt="Tarun on the TEDxAl Diyafah High School stage"
-            loading="lazy"
-            width="1380"
-            height="965"
-          />
-          <span class="play-link">
-            Watch the talk <span aria-hidden="true">↗</span>
-          </span>
-        </a>
-        <div class="talk-copy" id="tedx-talk">
-          <p class="eyebrow">TEDxAl Diyafah High School</p>
-          <h3>
-            Between Creation
-            <br />
-            and Becoming
-          </h3>
-          <p>
-            How artificial intelligence is growing faster than we can control. A
-            talk about the responsibility that comes with building powerful
-            systems.
-          </p>
-          <a class="text-link" href={talk}>
-            Watch on TEDx Talks <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </div>
-      <div class="leadership-list">
-        <a href={url("work/admunos/")}>
-          <span class="mono">01</span>
-          <div>
-            <h3>ADMUN 2.7 / Director of Logistics</h3>
-            <p>
-              Preparing the forthcoming conference’s logistics and building
-              admunOS to connect registration, check-in, and meals.
-            </p>
-          </div>
-          <span aria-hidden="true">↗</span>
-        </a>
-        <a href={url("about/#wharton")}>
-          <span class="mono">02</span>
-          <div>
-            <h3>Wharton Global High School Investment Competition</h3>
-            <p>
-              Introduced it to my school and led our first team, developing
-              investment strategies against a client brief.
-            </p>
-          </div>
-          <span aria-hidden="true">↗</span>
-        </a>
-        <a href={url("about/#sustainovation")}>
-          <span class="mono">03</span>
-          <div>
-            <h3>Sustainovation Challenge</h3>
-            <p>Entered the challenge and placed third.</p>
-          </div>
-          <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="about-teaser wrap">
-    <div class="about-teaser-content">
-      <span class="asterisk" aria-hidden="true">
-        ✳
-      </span>
-      <div>
-        <h2>
-          Code is one part
-          <br />
-          of the <em>picture.</em>
-        </h2>
-        <p>
-          I’m also a vocalist, a MUN enthusiast, and someone who likes finding
-          out how things work.
-        </p>
-        <a class="text-link" href={url("about/")}>
-          A little more about me <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="lab-teaser wrap">
-    <div>
-      <p class="eyebrow">The Lab</p>
-      <h2>
-        “What if
-        <br />I tried <em>this?</em>”
-      </h2>
-      <a class="text-link" href={url("lab/")}>
-        Step inside the lab <span aria-hidden="true">↗</span>
+  <section class="speaking-section wrap" id="speaking">
+    <h2>Speaking &amp; leadership</h2>
+    <div class="talk-copy" id="tedx-talk">
+      <h3>Between Creation and Becoming</h3>
+      <p class="detail">TEDxAl Diyafah High School</p>
+      <p>
+        My talk on artificial intelligence and the responsibility that comes
+        with building powerful systems.
+      </p>
+      <a class="text-link" href={talk}>
+        Watch the talk
       </a>
     </div>
+    <div class="leadership-list">
+      <div>
+        <h3>
+          <a href={url("work/admunos/")}>ADMUN 2.7</a>
+        </h3>
+        <p>
+          Director of Logistics. Preparing the forthcoming conference and
+          building admunOS for its operations.
+        </p>
+      </div>
+      <div>
+        <h3>
+          <a href={url("about/#wharton")}>
+            Wharton Global High School Investment Competition
+          </a>
+        </h3>
+        <p>
+          Introduced it to my school and led our first team, developing
+          investment strategies against a client brief.
+        </p>
+      </div>
+      <div>
+        <h3>
+          <a href={url("about/#sustainovation")}>Sustainovation Challenge</a>
+        </h3>
+        <p>Entered the challenge and placed third.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="personal-note wrap">
+    <h2>Outside these projects</h2>
+    <p>
+      I’m a vocalist and guitarist, a MUN enthusiast, and a founding core member
+      of my school’s Entrepreneurial Club. There’s{" "}
+      <a href={url("about/")}>more about me here</a>.
+    </p>
+    <p>
+      I also keep a <a href={url("lab/")}>Lab</a> for experiments in code,
+      automation, and hardware. You can try the barcode generator there.
+    </p>
   </section>
 </Layout>

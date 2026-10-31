@@ -5,7 +5,7 @@ import "@fontsource-variable/bodoni-moda/wght-italic.css";
 import "../styles/global.css";
 import "../styles/resume-printer.css";
 import ResumePrinter from "../components/ResumePrinter.astro";
-import { url, email, linkedin, github, projects } from "../data/site";
+import { url, email, linkedin, github } from "../data/site";
 interface Props {
   title?: string;
   description?: string;
@@ -44,19 +44,14 @@ const active = Astro.url.pathname;
     </a>
     <header class="site-header wrap">
       <a class="wordmark" href={url()} aria-label="Tarun Abraham, home">
-        ta<span aria-hidden="true">↗</span>
+        Tarun Abraham
       </a>
-      <span class="header-note mono">
-        A personal collection
-        <br />
-        Dubai, UAE · <time data-dubai>UTC +4</time>
-      </span>
       <nav aria-label="Main navigation">
         <a
           href={url("#work")}
           aria-current={active.includes("/work/") ? "page" : undefined}
         >
-          Work<span>{String(projects.length).padStart(2, "0")}</span>
+          Work
         </a>
         <a
           href={url("about/")}
@@ -71,7 +66,7 @@ const active = Astro.url.pathname;
           Lab
         </a>
         <a class="nav-contact" href={url("#contact")}>
-          Say hello <span aria-hidden="true">↗</span>
+          Contact
         </a>
       </nav>
     </header>
@@ -80,37 +75,28 @@ const active = Astro.url.pathname;
     </main>
     <footer id="contact" class="site-footer">
       <div class="wrap">
-        <div class="section-label">
-          <span>I’d love to work with like-minded people.</span>
-        </div>
-        <a class="hello" href={`mailto:${email}`}>
-          Let’s talk<span aria-hidden="true">↗</span>
-        </a>
+        <h2>Get in touch</h2>
+        <p>I’d love to hear from people working on interesting things.</p>
         <div class="footer-bottom">
           <a href={`mailto:${email}`}>{email}</a>
           <div>
-            <a href={github}>GitHub ↗</a>
-            <a href={linkedin}>LinkedIn ↗</a>
+            <a href={github}>GitHub</a>
+            <a href={linkedin}>LinkedIn</a>
             <a
               href={url("files/tarun-abraham-resume.pdf")}
               download="Tarun-Abraham-Resume.pdf"
               data-resume-trigger
             >
-              Resume ↓
+              Resume
             </a>
-            <a href={url("about/")}>More about me ↗</a>
           </div>
         </div>
         <div class="colophon mono">
           <span>Tarun Abraham © {new Date().getFullYear()}</span>
-          <span>Made with curiosity. Dubai, UAE.</span>
-          <a href="#top">Back to top ↑</a>
+          <a href="#top">Back to top</a>
         </div>
       </div>
     </footer>
     <ResumePrinter />
-    <script>
-      import "../scripts/site";
-    </script>
   </body>
 </html>
