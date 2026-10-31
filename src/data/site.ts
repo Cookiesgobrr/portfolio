@@ -110,7 +110,7 @@ export const projects: Project[] = [
     ],
     link: "",
     linkLabel: "",
-    repo: "",
+    repo: "https://github.com/Cookiesgobrr/admun-logistics-demo/",
     sections: [
       {
         id: "problem",

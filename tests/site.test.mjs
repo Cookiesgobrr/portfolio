@@ -33,9 +33,9 @@ test("selected work forms an ordered journey through three complete case studies
     );
   });
   assert.doesNotMatch(home, /admun-logistics-demo/);
-  assert.doesNotMatch(
+  assert.match(
     readFileSync("dist/work/admunos/index.html", "utf8"),
-    /admun-logistics-demo/,
+    /href="https:\/\/github\.com\/Cookiesgobrr\/admun-logistics-demo\/">\s*View source\s*<\/a>/,
   );
   assert.ok(
     readFileSync("dist/sitemap.xml", "utf8").includes(
@@ -47,25 +47,33 @@ test("selected work forms an ordered journey through three complete case studies
 test("every internal page, asset, and anchor resolves under /portfolio/", () => {
   for (const page of pages) {
     const html = readFileSync(page, "utf8");
-    for (const [, attr, value] of html.matchAll(/\b(href|src)="([^"]+)"/g)) {
-      if (/^(https?:|mailto:|data:)/.test(value)) continue;
-      const [path, anchor] = value.split("#");
-      if (path)
-        assert.ok(
-          path.startsWith("/portfolio/"),
-          `${page}: unbased ${attr} ${value}`,
-        );
-      let target = path
-        ? join("dist", path.slice("/portfolio/".length).split("?")[0])
-        : page;
-      if (target.endsWith("/") || !target.split("/").at(-1).includes("."))
-        target = join(target, "index.html");
-      assert.ok(existsSync(target), `${page}: missing ${target}`);
-      if (anchor && target.endsWith(".html"))
-        assert.ok(
-          readFileSync(target, "utf8").includes(`id="${anchor}"`),
-          `${page}: missing anchor ${value}`,
-        );
+    for (const [, attr, raw] of html.matchAll(
+      /\b(href|src|srcset)="([^"]+)"/g,
+    )) {
+      const values =
+        attr === "srcset"
+          ? raw.split(",").map((candidate) => candidate.trim().split(/\s+/)[0])
+          : [raw];
+      for (const value of values) {
+        if (/^(https?:|mailto:|data:)/.test(value)) continue;
+        const [path, anchor] = value.split("#");
+        if (path)
+          assert.ok(
+            path.startsWith("/portfolio/"),
+            `${page}: unbased ${attr} ${value}`,
+          );
+        let target = path
+          ? join("dist", path.slice("/portfolio/".length).split("?")[0])
+          : page;
+        if (target.endsWith("/") || !target.split("/").at(-1).includes("."))
+          target = join(target, "index.html");
+        assert.ok(existsSync(target), `${page}: missing ${target}`);
+        if (anchor && target.endsWith(".html"))
+          assert.ok(
+            readFileSync(target, "utf8").includes(`id="${anchor}"`),
+            `${page}: missing anchor ${value}`,
+          );
+      }
     }
   }
 });
