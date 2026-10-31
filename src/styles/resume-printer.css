@@ -1,28 +1,6 @@
-.resume-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-  border: 1px solid var(--ink);
-  padding: 16px 21px;
-  font-size: 14px;
-  transition:
-    background 0.2s,
-    color 0.2s;
-}
-.resume-button:hover {
-  background: var(--ink);
-  color: var(--paper);
-}
-.resume-button span {
-  font-size: 22px;
-}
-.hero-actions {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
 .resume-dialog {
+  font-size: 16px;
+  line-height: normal;
   width: min(680px, calc(100vw - 32px));
   max-height: calc(100dvh - 32px);
   border: 1px solid var(--ink);
@@ -345,17 +323,6 @@
   }
 }
 @media (max-width: 760px) {
-  .hero-actions {
-    grid-column: 1/-1;
-    justify-content: space-between;
-  }
-  .hero-actions .circle-link {
-    align-self: center;
-  }
-  .resume-button {
-    padding: 12px 19px;
-    min-width: 155px;
-  }
   .press-intro {
     padding: 24px 22px 0;
     display: block;

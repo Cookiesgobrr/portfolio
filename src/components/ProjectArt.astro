@@ -6,77 +6,23 @@ interface Props {
   alt: string;
 }
 const { slug, image, alt } = Astro.props;
-const screen =
+const dimensions =
   slug === "tacticlens"
-    ? { title: "TacticLens Live / match studio", width: 1308, height: 836 }
-    : { title: "EpilEducate / first aid", width: 1366, height: 1024 };
+    ? { width: 1308, height: 836 }
+    : slug === "admunos"
+      ? { width: 1363, height: 936 }
+      : { width: 1366, height: 1024 };
 ---
 
-<div class:list={["project-art", slug]}>
-  {slug === "admunos" ? (
-    <div class="system-map" role="img" aria-label={alt}>
-      <div class="system-map-heading" aria-hidden="true">
-        <span class="mono">admunOS / system map</span>
-        <span class="mono">In development</span>
-      </div>
-      <div class="system-map-title" aria-hidden="true">
-        <p>
-          One ID.
-          <br />
-          <em>Every desk.</em>
-        </p>
-        <span>
-          Registration to
-          <br />
-          conference operations.
-        </span>
-      </div>
-      <div class="system-steps" aria-hidden="true">
-        <div>
-          <span class="mono">01 / Collect</span>
-          <strong>Registration</strong>
-          <small>Import signups</small>
-        </div>
-        <span class="system-arrow">→</span>
-        <div>
-          <span class="mono">02 / Verify</span>
-          <strong>Payment review</strong>
-          <small>Finalize paid delegates</small>
-        </div>
-        <span class="system-arrow">→</span>
-        <div class="system-id">
-          <span class="mono">03 / Identify</span>
-          <strong>Delegate ID</strong>
-          <small>Permanent · QR payload</small>
-        </div>
-      </div>
-      <div class="system-operations" aria-hidden="true">
-        <span>
-          Staff scanner <i>↔</i> Server checks
-        </span>
-        <span>
-          Attendance <i>·</i> Meals
-        </span>
-      </div>
-      <p class="system-map-note mono" aria-hidden="true">
-        QR: ID only / Duplicate checks at the server
-      </p>
-    </div>
-  ) : (
-    <div class="screen-frame">
-      <div class="screen-bar" aria-hidden="true">
-        <i></i>
-        <i></i>
-        <i></i>
-        <span>{screen.title}</span>
-      </div>
-      <img
-        src={url(`images/${image}`)}
-        alt={alt}
-        loading="lazy"
-        width={screen.width}
-        height={screen.height}
-      />
-    </div>
+<figure class:list={["project-art", slug]}>
+  <img
+    src={url(`images/${image}`)}
+    alt={alt}
+    loading="lazy"
+    width={dimensions.width}
+    height={dimensions.height}
+  />
+  {slug === "admunos" && (
+    <figcaption>Interface preview with fictional demo data.</figcaption>
   )}
-</div>
+</figure>

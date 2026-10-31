@@ -60,8 +60,8 @@ export const projects = [
     category: "Conference logistics × connected workflows",
     status: "In development · preparing for ADMUN 2.7",
     year: "2026",
-    image: "",
-    alt: "admunOS system map: registration and payment review create a paid delegate record with one permanent ID, used for attendance and meal tracking through a staff scanner and server checks",
+    image: "admunos-interface.webp",
+    alt: "admunOS staff directory interface showing a fictional Sample Delegate at Test School, with attendance and meal scanner modes",
     line: "The conference I’m helping run. The system I’m building for it.",
     intro:
       "I became Director of Logistics for ADMUN 2.7 and needed to connect registration, payment checks, and what happens at the door. I began building admunOS so the same delegate record could connect a verified payment to check-in and meal collection.",
