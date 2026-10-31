@@ -51,8 +51,8 @@ if (
   }
 
   function finish(message: string) {
-    setPhase("ready", message, "YOUR COPY IS READY");
-    direct!.innerHTML = 'Download PDF <span aria-hidden="true">↓</span>';
+    setPhase("ready", message, "Your copy is ready");
+    direct!.textContent = "Download PDF";
   }
 
   async function download(signal?: AbortSignal) {
@@ -82,10 +82,10 @@ if (
       setPhase(
         "gathering",
         "Gathering education, projects, speaking, and leadership…",
-        "01 / GATHERING DETAILS",
+        "Gathering details",
       );
       await pause(1900, signal);
-      setPhase("printing", "Printing your copy…", "02 / PRINTING YOUR COPY");
+      setPhase("printing", "Printing your copy…", "Printing your copy");
       await pause(1500, signal);
       if (signal.aborted || !dialog!.open) return;
       await download(signal);
@@ -94,9 +94,9 @@ if (
         setPhase(
           "ready",
           "The animation was interrupted. You can download the PDF below.",
-          "DOWNLOAD AVAILABLE",
+          "Download available",
         );
-        direct!.textContent = "Download PDF ↓";
+        direct!.textContent = "Download PDF";
       }
     }
   }
@@ -124,8 +124,7 @@ if (
         return response.blob();
       });
       void resumeFile.catch(() => {});
-      direct.innerHTML =
-        'Skip animation &amp; download <span aria-hidden="true">↓</span>';
+      direct.textContent = "Skip and download";
       previousOverflow = document.documentElement.style.overflow;
       document.documentElement.style.overflow = "hidden";
       dialog.showModal();

@@ -5,8 +5,7 @@
   --line: #d3d1c7;
   --red: #ca3a27;
   --lime: #dce98b;
-  --serif: "Bodoni Moda Variable", Georgia, serif;
-  --sans: "DM Sans Variable", Arial, sans-serif;
+  --serif: "EB Garamond Variable", Garamond, "Times New Roman", serif;
 }
 * {
   box-sizing: border-box;
@@ -15,7 +14,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font: 17px/1.7 var(--sans);
+  font: 20px/1.6 var(--serif);
   -webkit-font-smoothing: antialiased;
 }
 ::selection {
@@ -60,16 +59,16 @@ h2,
 h3 {
   font-weight: 600;
   line-height: 1.25;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
 }
 h1 {
-  font-size: 42px;
+  font-size: 46px;
 }
 h2 {
-  font-size: 25px;
+  font-size: 28px;
 }
 h3 {
-  font-size: 21px;
+  font-size: 23px;
 }
 em {
   font: inherit;
@@ -84,7 +83,7 @@ strong {
 .mono,
 .eyebrow,
 .section-label {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--muted);
 }
 .eyebrow {
@@ -116,14 +115,14 @@ strong {
   border-bottom: 1px solid var(--line);
 }
 .wordmark {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   text-decoration: none;
 }
 .site-header nav {
   display: flex;
   gap: 25px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .site-header nav a {
   text-decoration: none;
@@ -145,15 +144,15 @@ strong {
 }
 .hero h1 {
   font-family: var(--serif);
-  font-size: 57px;
+  font-size: 60px;
   font-weight: 500;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.02em;
   line-height: 1.1;
 }
 .hero-location {
   margin-top: 12px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 16px;
 }
 .hero-photo {
   grid-column: 2;
@@ -167,7 +166,7 @@ strong {
 }
 .hero-photo figcaption {
   margin-top: 9px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
 }
 .hero-bio {
@@ -182,7 +181,7 @@ strong {
   display: flex;
   flex-wrap: wrap;
   gap: 10px 22px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .hero-links {
   margin-top: 20px;
@@ -214,11 +213,11 @@ strong {
 .project-art figcaption {
   margin-top: 8px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
 }
 .project-copy h3 {
-  font-size: 24px;
+  font-size: 27px;
 }
 .project-copy h3 a {
   text-decoration: none;
@@ -228,16 +227,16 @@ strong {
 }
 .project-copy > p {
   margin-top: 12px;
-  font-size: 16px;
+  font-size: 18px;
 }
 .project-copy > .project-status {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted);
   margin-top: 6px;
 }
 .project-copy > .project-built {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 16px;
 }
 .project-built strong {
   color: var(--ink);
@@ -258,14 +257,14 @@ strong {
 }
 .talk-copy .detail {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 6px;
 }
 .talk-copy > p:not(.detail) {
   margin: 12px 0;
 }
 .text-link {
-  font-size: 14px;
+  font-size: 16px;
 }
 .text-link > span {
   display: none;
@@ -275,7 +274,7 @@ strong {
   border-top: 1px solid var(--line);
 }
 .leadership-list h3 {
-  font-size: 18px;
+  font-size: 20px;
 }
 .leadership-list h3 a {
   text-decoration: none;
@@ -284,7 +283,7 @@ strong {
   text-decoration: underline;
 }
 .leadership-list p {
-  font-size: 15px;
+  font-size: 17px;
   color: var(--muted);
   margin-top: 6px;
   max-width: 750px;
@@ -306,16 +305,16 @@ strong {
   border-top: 1px solid var(--line);
 }
 .site-footer h2 {
-  font-size: 22px;
+  font-size: 25px;
   margin-bottom: 10px;
 }
 .site-footer p {
-  font-size: 15px;
+  font-size: 17px;
   color: var(--muted);
 }
 .footer-bottom {
   margin-top: 18px;
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   justify-content: space-between;
   gap: 18px;
@@ -330,7 +329,7 @@ strong {
   display: flex;
   justify-content: space-between;
   margin-top: 40px;
-  font-size: 12px;
+  font-size: 14px;
   gap: 20px;
 }
 .colophon a {
@@ -343,7 +342,7 @@ strong {
   margin: 16px 0 22px;
 }
 .intro-text {
-  font-size: 18px;
+  font-size: 20px;
   max-width: 740px;
 }
 .about-photo {
@@ -358,7 +357,7 @@ strong {
   flex-wrap: wrap;
   gap: 10px;
   padding-top: 10px;
-  font-size: 13px;
+  font-size: 15px;
 }
 .editorial-row {
   padding: 38px 0;
@@ -385,7 +384,7 @@ strong {
   margin-bottom: 16px;
 }
 .body-copy h3 {
-  font-size: 20px;
+  font-size: 22px;
   margin: 28px 0 12px;
 }
 .body-copy h3:first-child {
@@ -393,7 +392,7 @@ strong {
 }
 .body-copy .small,
 .small {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--muted);
 }
 .photo-pair {
@@ -409,7 +408,7 @@ strong {
 }
 .photo-pair figcaption {
   margin-top: 8px;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted);
 }
 .fact-list {
@@ -423,7 +422,7 @@ strong {
   gap: 20px;
   padding: 12px 0;
   border-bottom: 1px solid var(--line);
-  font-size: 14px;
+  font-size: 16px;
 }
 .fact-list li span:last-child {
   text-align: right;
@@ -434,23 +433,23 @@ strong {
 }
 .back-link {
   display: inline-block;
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 26px;
 }
 .case-intro h1 {
   margin: 12px 0 22px;
-  font-size: 46px;
+  font-size: 49px;
 }
 .case-lead {
   max-width: 760px;
 }
 .case-lead h2 {
-  font-size: 24px;
+  font-size: 27px;
   margin-bottom: 16px;
   line-height: 1.4;
 }
 .case-lead p {
-  font-size: 17px;
+  font-size: 19px;
 }
 .case-hero {
   max-width: 860px;
@@ -467,13 +466,13 @@ strong {
   margin: 0;
 }
 .case-meta dt {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   margin-bottom: 6px;
 }
 .case-meta dd {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--muted);
 }
 .case-body {
@@ -504,7 +503,7 @@ strong {
   text-decoration: none;
 }
 .next-project h2 {
-  font-size: 24px;
+  font-size: 27px;
 }
 .next-project .eyebrow {
   margin-bottom: 8px;
@@ -515,7 +514,7 @@ strong {
   background: #eeece5;
   padding: 24px;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
 }
 .system-steps {
   display: flex;
@@ -552,7 +551,7 @@ strong {
   color: var(--ink);
   border: 1px solid var(--line);
   padding: 9px 14px;
-  font-size: 14px;
+  font-size: 16px;
   min-height: 44px;
 }
 .lab-filter button[aria-pressed="true"] {
@@ -570,12 +569,12 @@ strong {
   display: none;
 }
 .experiment-text h2 {
-  font-size: 26px;
+  font-size: 29px;
   margin-bottom: 18px;
 }
 .experiment-text > p:not(.eyebrow) {
   margin-bottom: 16px;
-  font-size: 16px;
+  font-size: 18px;
 }
 .experiment-demo,
 .experiment-aside,
@@ -588,7 +587,7 @@ strong {
 }
 .experiment-demo label {
   display: block;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
 }
 .experiment-demo input {
@@ -600,12 +599,12 @@ strong {
   color: var(--ink);
   padding: 10px;
   margin: 12px 0;
-  font-size: 16px;
+  font-size: 18px;
   border-radius: 0;
 }
 .experiment-demo .mono {
   display: block;
-  font-size: 12px;
+  font-size: 14px;
 }
 .experiment-demo button {
   margin: 18px 0;
@@ -613,7 +612,7 @@ strong {
   color: var(--paper);
   border: 1px solid var(--ink);
   padding: 10px 16px;
-  font-size: 14px;
+  font-size: 16px;
   min-height: 44px;
 }
 .barcode-output {
@@ -626,7 +625,7 @@ strong {
   height: auto;
 }
 .experiment-demo .feedback {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted);
   margin-top: 12px;
 }
@@ -635,17 +634,17 @@ strong {
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
-  font-size: 17px;
+  font-size: 19px;
 }
 .flow-type i {
   font-style: normal;
 }
 .experiment-flow > p {
   margin-top: 22px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .experiment-aside .big-type {
-  font-size: 26px;
+  font-size: 29px;
   line-height: 1.4;
   margin: 20px 0;
 }
@@ -657,19 +656,6 @@ strong {
 }
 .not-found p {
   margin-bottom: 18px;
-}
-.resume-dialog em {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 450;
-}
-.resume-dialog h2 {
-  font-weight: 500;
-  letter-spacing: -0.05em;
-}
-.resume-dialog .eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.065em;
 }
 .sr-only {
   position: absolute;
@@ -693,7 +679,7 @@ strong {
   }
   .site-header nav {
     gap: 16px;
-    font-size: 13px;
+    font-size: 15px;
     flex-wrap: wrap;
     justify-content: flex-end;
   }
@@ -703,16 +689,16 @@ strong {
     gap: 24px;
   }
   .hero h1 {
-    font-size: 43px;
+    font-size: 48px;
   }
   .hero-location {
-    font-size: 13px;
+    font-size: 15px;
   }
   .hero-photo {
     grid-row: 1;
   }
   .hero-photo figcaption {
-    font-size: 11px;
+    font-size: 13px;
   }
   .hero-bio {
     grid-column: 1 / -1;
@@ -722,19 +708,19 @@ strong {
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
   }
   .project-copy h3 {
-    font-size: 22px;
+    font-size: 25px;
   }
   .project-copy > p {
-    font-size: 15px;
+    font-size: 17px;
   }
   .case-intro h1 {
-    font-size: 37px;
+    font-size: 40px;
   }
   .case-meta {
     gap: 20px;
   }
   .case-meta dd {
-    font-size: 13px;
+    font-size: 15px;
   }
   .lab-experiment {
     gap: 25px;
@@ -745,13 +731,13 @@ strong {
 }
 @media (max-width: 600px) {
   body {
-    font-size: 16px;
+    font-size: 18px;
   }
   h1 {
-    font-size: 35px;
+    font-size: 38px;
   }
   h2 {
-    font-size: 24px;
+    font-size: 27px;
   }
   .site-header {
     display: block;
@@ -766,14 +752,14 @@ strong {
     gap: 22px 18px;
   }
   .hero h1 {
-    font-size: 39px;
+    font-size: 44px;
   }
   .hero-location {
     margin-top: 10px;
     line-height: 1.5;
   }
   .hero-bio p {
-    font-size: 16px;
+    font-size: 18px;
   }
   .project {
     grid-template-columns: 1fr;
@@ -784,13 +770,13 @@ strong {
     max-width: 480px;
   }
   .project-copy > p {
-    font-size: 16px;
+    font-size: 18px;
   }
   .project-copy > .project-built {
-    font-size: 14px;
+    font-size: 16px;
   }
   .project-copy > .project-status {
-    font-size: 13px;
+    font-size: 15px;
   }
   .speaking-section,
   .personal-note {
@@ -810,7 +796,7 @@ strong {
     grid-template-columns: 1fr;
   }
   .photo-caption {
-    font-size: 12px;
+    font-size: 14px;
   }
   .about-photo {
     aspect-ratio: 1.5;
@@ -822,10 +808,10 @@ strong {
     padding-top: 28px;
   }
   .case-lead h2 {
-    font-size: 22px;
+    font-size: 25px;
   }
   .case-lead p {
-    font-size: 16px;
+    font-size: 18px;
   }
   .case-meta {
     grid-template-columns: 1fr;
@@ -835,10 +821,10 @@ strong {
     margin-bottom: 3px;
   }
   .case-meta dd {
-    font-size: 14px;
+    font-size: 16px;
   }
   .case-body h2 {
-    font-size: 24px;
+    font-size: 27px;
   }
   .system-map {
     padding: 20px 12px;
@@ -860,7 +846,7 @@ strong {
   }
   .lab-filter button {
     padding-inline: 12px;
-    font-size: 13px;
+    font-size: 15px;
   }
   .experiment-demo,
   .experiment-aside,
@@ -868,7 +854,7 @@ strong {
     padding: 20px;
   }
   .intro-text {
-    font-size: 17px;
+    font-size: 19px;
   }
 }
 @media (max-width: 360px) {
@@ -877,7 +863,7 @@ strong {
     column-gap: 14px;
   }
   .hero h1 {
-    font-size: 36px;
+    font-size: 40px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

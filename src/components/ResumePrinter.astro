@@ -9,7 +9,7 @@ import { url } from "../data/site";
   data-resume-dialog
 >
   <div class="press-header">
-    <span class="eyebrow">TA / Document press</span>
+    <h2 id="resume-title">Résumé</h2>
     <button
       class="press-close"
       type="button"
@@ -20,14 +20,9 @@ import { url } from "../data/site";
       Close <span aria-hidden="true">×</span>
     </button>
   </div>
-  <div class="press-intro">
-    <h2 id="resume-title">
-      A little about me.
-      <br />
-      <em>On paper.</em>
-    </h2>
-    <p id="resume-description">One résumé, coming right up.</p>
-  </div>
+  <p class="press-description" id="resume-description">
+    Your PDF will download when printing finishes.
+  </p>
   <div class="press-scene" aria-hidden="true">
     <div class="press-details">
       <span class="detail-slip slip-one">Tarun Abraham</span>
@@ -43,31 +38,21 @@ import { url } from "../data/site";
           src={url("images/resume-preview.webp")}
           width="595"
           height="842"
-          alt="Preview of Tarun Abraham’s one-page résumé"
+          alt="Preview of Tarun Abraham’s résumé"
           loading="lazy"
         />
       </div>
     </div>
     <div class="press-machine">
       <div class="press-intake"></div>
-      <div class="press-machine-top">
-        <span>TA—01</span>
-        <i class="press-light"></i>
-      </div>
-      <div class="press-display">
-        <span data-press-display>READY TO COMPOSE</span>
-        <span class="press-meter">
-          <i></i>
-        </span>
-      </div>
-      <div class="press-machine-bottom">
-        <span>PERSONAL EDITION</span>
-        <span class="press-rollers">
-          <i></i>
-          <i></i>
-          <i></i>
-        </span>
-      </div>
+      <p class="press-name">Tarun Abraham</p>
+      <p class="press-display" data-press-display>
+        Ready to print
+      </p>
+      <span class="press-meter">
+        <i></i>
+      </span>
+      <span class="press-format">Résumé · PDF</span>
       <div class="press-output"></div>
     </div>
   </div>
@@ -81,7 +66,7 @@ import { url } from "../data/site";
       download="Tarun-Abraham-Resume.pdf"
       data-resume-direct
     >
-      Skip animation &amp; download <span aria-hidden="true">↓</span>
+      Skip and download
     </a>
   </div>
 </dialog>
