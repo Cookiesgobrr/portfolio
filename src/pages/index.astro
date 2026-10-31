@@ -21,15 +21,15 @@ const summaries: Record<string, string> = {
     </div>
     <figure class="hero-photo">
       <img
-        src={url("images/tedx.webp")}
-        alt="Tarun receiving recognition on the TEDxAl Diyafah High School stage"
-        width="1380"
-        height="965"
+        src={url("images/tarun-portrait-480.webp")}
+        srcset={`${url("images/tarun-portrait-240.webp")} 240w, ${url("images/tarun-portrait-480.webp")} 480w, ${url("images/tarun-portrait-768.webp")} 768w`}
+        sizes="(max-width: 360px) 84px, (max-width: 600px) 100px, (max-width: 760px) 120px, 190px"
+        alt="Tarun smiling, wearing glasses and a brown sweater, with his arms crossed"
+        width="480"
+        height="640"
         fetchpriority="high"
       />
-      <figcaption>
-        <a href="#tedx-talk">At TEDxAl Diyafah</a>
-      </figcaption>
+      <figcaption>Hello, I’m Tarun.</figcaption>
     </figure>
     <div class="hero-bio">
       <p>
@@ -89,7 +89,7 @@ const summaries: Record<string, string> = {
   </section>
 
   <section class="speaking-section wrap" id="speaking">
-    <h2>Speaking &amp; leadership</h2>
+    <h2>Selected achievements</h2>
     <div class="talk-copy" id="tedx-talk">
       <h3>Between Creation and Becoming</h3>
       <p class="detail">TEDxAl Diyafah High School</p>
@@ -104,11 +104,14 @@ const summaries: Record<string, string> = {
     <div class="leadership-list">
       <div>
         <h3>
-          <a href={url("work/admunos/")}>ADMUN 2.7</a>
+          <a href={url("about/#brainstormers")}>
+            Brainstormers / Peter Jones Tycoon
+          </a>
         </h3>
         <p>
-          Director of Logistics. Preparing the forthcoming conference and
-          building admunOS for its operations.
+          I led Brainstormers in the Peter Jones Tycoon Business Enterprise
+          Competition. We were recognized as the winning business across the UAE
+          that year.
         </p>
       </div>
       <div>
@@ -118,15 +121,19 @@ const summaries: Record<string, string> = {
           </a>
         </h3>
         <p>
-          Introduced it to my school and led our first team, developing
-          investment strategies against a client brief.
+          I introduced the competition to my school, helped establish its first
+          participating team, and led investment strategy and stock-selection
+          planning against the competition brief.
         </p>
       </div>
       <div>
         <h3>
           <a href={url("about/#sustainovation")}>Sustainovation Challenge</a>
         </h3>
-        <p>Entered the challenge and placed third.</p>
+        <p>
+          Participated in the challenge hosted by De Montfort University and
+          placed third.
+        </p>
       </div>
     </div>
   </section>
