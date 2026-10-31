@@ -482,6 +482,66 @@ strong {
 .case-body .editorial-row:last-child {
   border-bottom: 0;
 }
+.case-body .editorial-row[id] {
+  scroll-margin-top: 28px;
+}
+.case-contents {
+  padding-top: 30px;
+}
+.case-contents > p {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.case-contents ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 17px;
+}
+.case-contents a {
+  text-decoration-color: var(--line);
+  text-underline-offset: 4px;
+}
+.case-list {
+  padding-left: 22px;
+  margin: 18px 0 0;
+}
+.case-list li + li {
+  margin-top: 12px;
+}
+.case-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin-top: 26px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.case-table caption {
+  text-align: left;
+  font-size: 16px;
+  color: var(--muted);
+  padding-bottom: 12px;
+}
+.case-table th,
+.case-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.case-table th {
+  font-weight: 600;
+}
+.case-table th:first-child {
+  width: 30%;
+  padding-right: 20px;
+}
 .contribution-list {
   padding-left: 22px;
   margin: 16px 0 0;

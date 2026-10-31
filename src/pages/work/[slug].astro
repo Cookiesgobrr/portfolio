@@ -45,6 +45,20 @@ const { project, next } = Astro.props;
       </dl>
     </div>
     <div class="case-body">
+      {project.sections.some((section) => section.id) && (
+        <nav class="case-contents" aria-label="Case study sections">
+          <p>In this case study</p>
+          <ol>
+            {project.sections
+              .filter((section) => section.id)
+              .map((section) => (
+                <li>
+                  <a href={`#${section.id}`}>{section.label}</a>
+                </li>
+              ))}
+          </ol>
+        </nav>
+      )}
       <section class="editorial-row case-contribution">
         <div class="body-copy">
           <h2>My contribution</h2>
@@ -56,11 +70,41 @@ const { project, next } = Astro.props;
         </div>
       </section>
       {project.sections.map((section, i) => (
-        <section class="editorial-row">
+        <section class="editorial-row" id={section.id}>
           <p class="eyebrow">{section.label}</p>
           <div class="body-copy">
             <h2>{section.title}</h2>
-            <p>{section.body}</p>
+            {(Array.isArray(section.body) ? section.body : [section.body]).map(
+              (paragraph) => (
+                <p>{paragraph}</p>
+              ),
+            )}
+            {section.list && (
+              <ul class="case-list">
+                {section.list.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
+            {section.table && (
+              <table class="case-table">
+                <caption>{section.table.caption}</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Layer</th>
+                    <th scope="col">Responsibility</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {section.table.rows.map((row) => (
+                    <tr>
+                      <th scope="row">{row.layer}</th>
+                      <td>{row.responsibility}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
             {project.slug === "admunos" && section.label === "The system" && (
               <SystemMap />
             )}

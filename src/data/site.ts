@@ -5,7 +5,40 @@ export const linkedin = "https://www.linkedin.com/in/tarnu/";
 export const github = "https://github.com/Cookiesgobrr";
 export const talk = "https://www.youtube.com/watch?v=JCxpD2Mlkg8";
 
-export const projects = [
+interface CaseSection {
+  id?: string;
+  label: string;
+  title: string;
+  body: string | string[];
+  list?: string[];
+  table?: {
+    caption: string;
+    rows: { layer: string; responsibility: string }[];
+  };
+}
+
+interface Project {
+  slug: string;
+  number: string;
+  name: string;
+  category: string;
+  status: string;
+  year: string;
+  image: string;
+  alt: string;
+  line: string;
+  intro: string;
+  role: string;
+  stack: string;
+  contribution: string;
+  built: string[];
+  link: string;
+  linkLabel: string;
+  repo: string;
+  sections: CaseSection[];
+}
+
+export const projects: Project[] = [
   {
     slug: "tacticlens",
     number: "01",
@@ -80,29 +113,123 @@ export const projects = [
     repo: "",
     sections: [
       {
+        id: "problem",
         label: "The problem",
         title: "One delegate, several separate lists.",
-        body: "Registration, payment verification, badges, attendance, and meals all depend on knowing who someone is and what has been confirmed. As I prepared for the logistics role, I wanted those steps to use the same record. Otherwise, every desk would have its own version of the answer.",
+        body: [
+          "Becoming Director of Logistics for ADMUN 2.7 meant thinking beyond the registration form. A delegate needs to be registered, have their payment confirmed, receive an identity, enter the right sessions, and collect the right meals. Each step depends on something decided earlier.",
+          "Handling those as separate lists would leave staff reconciling answers at the door. A name on a registration sheet does not prove payment; a badge does not tell a meal desk whether it has already been used. I began building admunOS to connect those decisions around one delegate record.",
+          "The scope is conference operations: importing registrations, reconciling payment records, and giving staff a way to act on the confirmed information. It does not collect or process payments itself.",
+        ],
       },
       {
+        id: "system",
         label: "The system",
-        title: "A permanent ID connects the steps.",
-        body: "Registration exports enter a signup database. A separate payment import is reviewed before uniquely matched, paid signups become operational delegate records. Only then does the system issue a permanent Delegate ID. Staff use that ID for directory lookup, QR check-in, attendance sessions, and meal collection. Reimports preserve logistics fields such as committee allocation and portfolio.",
+        title: "Registration is a starting point, not an admission pass.",
+        body: [
+          "The backend keeps signups and finalized delegates separate. Registration imports enter the signup database without a Delegate ID or QR code. Only a uniquely matched, verified payment promotes a signup into the operational delegate database and issues a permanent ID.",
+          "That ID then connects directory lookup, the badge QR, attendance sessions, and meal records. Reimporting registration data preserves operational fields such as committee allocation and portfolio. A held, cancelled, or refunded payment prevents a new delegate from being finalized; an existing finalized match is retained as withdrawn for audit and hidden from app lookups.",
+          "This separation matters at a desk: staff work from the finalized records, rather than having to interpret an unverified signup or a payment spreadsheet themselves.",
+        ],
       },
       {
+        id: "payments",
+        label: "Imports & payment review",
+        title: "A plausible match is not enough.",
+        body: [
+          "The source registration files have different internal and external layouts. The import layer maps them into a common signup structure while retaining the original data in staging. If a populated column is unfamiliar, the system reports it rather than silently discarding its contents.",
+          "Payment matching follows the identifiers available in each source. External payments use the student number against the source registration number. Internal payments use the normalized name and configured school. School GR numbers are informational, not payment-matching or scanner identifiers.",
+          "Ambiguous matches and duplicate payment rows go into a review sheet instead of automatically creating delegates. The import also distinguishes adding information from replacing the current paid list:",
+        ],
+        list: [
+          "Additive import adds or updates verified payments. A delegate is not removed just because they are absent from that file.",
+          "Sync import also removes finalized delegates missing from the verified list and clears their signup payment state. It requires an extra confirmation, and removed Delegate IDs are never reused.",
+        ],
+      },
+      {
+        id: "architecture",
+        label: "The architecture",
+        title: "The phone asks. The backend decides.",
+        body: [
+          "The staff interface is a browser app served over HTTPS so phones can use their cameras. Its requests go through a Netlify Function to Google Apps Script, which owns the record checks and writes in Google Sheets.",
+          "Decoding a QR only supplies an ID. Approval has to come back from the server after the requested attendance or meal action has been checked and recorded.",
+        ],
+        table: {
+          caption: "How a scan moves through admunOS",
+          rows: [
+            {
+              layer: "Staff browser",
+              responsibility:
+                "Reads the QR or manual ID, collects the station and session or meal selection, and displays the server’s result.",
+            },
+            {
+              layer: "Netlify Function",
+              responsibility:
+                "Validates the request, adds the private backend credential on the server, forwards the action, and limits the returned fields.",
+            },
+            {
+              layer: "Google Apps Script",
+              responsibility:
+                "Checks staff access, delegate eligibility, the session or meal, and whether the action has already been recorded. Writes approved records.",
+            },
+            {
+              layer: "Google Sheets",
+              responsibility:
+                "Holds signups, finalized delegates, payment review, configuration, and separate attendance and meal logs.",
+            },
+          ],
+        },
+      },
+      {
+        id: "staff-workflow",
+        label: "At the desk",
+        title: "Give staff an answer they can act on.",
+        body: [
+          "Staff enter an access code, choose attendance or meal mode, select the relevant session or meal, and identify their scanning station. The directory can find finalized delegates by ID, name, school, or committee, with a separate details view.",
+          "Scanning supports the rear camera, a QR image, and manual Delegate ID entry. The manual route stays available when a camera permission, damaged printout, or particular phone gets in the way.",
+          "The interface distinguishes an approval from an already-recorded action, an unknown ID, an inactive or withdrawn delegate, and a connection failure. Duplicate responses include the previous recording time. Text and symbols accompany the visual result, with optional sound and vibration. The browser also prevents overlapping scan requests and briefly pauses repeated QR decoding.",
+        ],
+      },
+      {
+        id: "reliability",
         label: "A technical decision",
         title: "Two phones. One meal record.",
-        body: "A camera cooldown can stop repeat scans on one phone, but it cannot coordinate two desks. For attendance and meals, the backend takes a script-wide lock, rechecks the delegate-and-session or delegate-and-meal key, and writes and flushes the record before releasing the lock. A repeat returns an already-recorded result. The duplicate rule belongs where the record is written.",
+        body: [
+          "A camera cooldown helps on one phone. It cannot stop two desks from scanning the same badge at nearly the same time. I put the duplicate check where the record is written, rather than relying on what an individual browser remembers.",
+          "An attendance record is keyed by Delegate ID plus session; a meal record by Delegate ID plus meal code. The backend takes a script-wide lock, rechecks that key, appends the record, and flushes the write before releasing the lock. If the key already exists, it returns an already-recorded result and the earlier timestamp. The lock is released even when the operation fails.",
+          "The two keys also keep the rules separate. Attending one session should not block another session, and collecting one meal should not block a different meal.",
+          "Connectivity has a deliberate limit. The app caches its static shell, but API responses are not cached and unconfirmed writes are not queued as successful check-ins. A timeout can leave a write’s outcome uncertain; retrying through the same duplicate check can reveal a record that reached the server before the response was lost.",
+          "The documented outage fallback is operational: keep a protected paper record of the ID, time, station, session or meal, and operator. One administrator reconciles it through the normal server workflow once connectivity returns. That procedure still needs to be rehearsed with staff before the event.",
+        ],
       },
       {
+        id: "privacy",
         label: "Staff access & privacy",
-        title: "The badge carries an ID.",
-        body: "The QR contains only the Delegate ID. Staff authenticate with a shared access code, and the server confirms each scan. A server-side proxy keeps backend credentials out of the browser, while responses limit fields to the particular staff workflow. The app caches its static shell, but does not cache delegate responses or queue unconfirmed writes as successful check-ins.",
+        title: "The badge carries an ID, not a profile.",
+        body: [
+          "The QR contains only the Delegate ID. It does not carry a name, school, contact details, food preference, or credentials. The browser decodes it locally, then requests the information needed for the selected staff action.",
+          "Search, scan results, and delegate details have different allowed fields. Search results omit contact and food information; the details view permits selected operational fields, including food preference and mobile number. Payment data, email, school GR numbers, and source registration numbers are excluded from the staff detail response.",
+          "The Netlify proxy keeps the backend URL and API credential out of browser configuration. Protected actions require a non-empty, correct staff code; the browser keeps that code in session storage without persisting delegate records. This is shared-code staff access, not individual staff accounts or per-person permissions. Station names identify scanning locations, not authenticated staff identities.",
+        ],
       },
       {
+        id: "verification",
+        label: "Checking the system",
+        title: "Test the decisions, including the awkward ones.",
+        body: [
+          "The repository includes automated tests for import normalization, payment matching, ambiguous and duplicate rows, mandatory staff access, API validation, response-field filtering, and upstream failures.",
+          "An Apps Script self-check looks for configuration problems, duplicate Delegate IDs, invalid finalized payment states, QR formula issues, and duplicate attendance or meal keys. Controlled demo records include paid and unpaid fictional signups, so the distinction between registration and scanner visibility can be checked without exposing real delegates.",
+        ],
+      },
+      {
+        id: "status",
         label: "Where it stands",
         title: "Built for a conference still ahead.",
-        body: "I’m preparing admunOS for the forthcoming ADMUN 2.7. The repository includes automated tests and a controlled workflow using fictional delegates. Venue-network, phone-camera, and multi-device checks are part of preparation before event-day use.",
+        body: [
+          "admunOS is in development and being prepared for the forthcoming ADMUN 2.7. The repository contains the registration and payment workflow, staff interface, server proxy, and attendance and meal services.",
+          "Preparation still includes testing the actual scanning phones and camera permissions, checking venue Wi-Fi and mobile-data fallback, rehearsing simultaneous scans from two devices, and arranging backups and a recovery procedure. These are the practical checks between implemented code and something staff can depend on at the door.",
+          "The project started with a responsibility I had taken on. Building it has meant following that responsibility through the less visible parts: mismatched records, repeat scans, missing responses, and what someone should do when the screen cannot give them an answer.",
+        ],
       },
     ],
   },
