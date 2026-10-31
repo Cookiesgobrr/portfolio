@@ -53,7 +53,7 @@ const { project, next } = Astro.props;
               .filter((section) => section.id)
               .map((section) => (
                 <li>
-                  <a href={`#${section.id}`}>{section.label}</a>
+                  <a href={`#${section.id}`}>{section.title}</a>
                 </li>
               ))}
           </ol>
@@ -71,43 +71,15 @@ const { project, next } = Astro.props;
       </section>
       {project.sections.map((section, i) => (
         <section class="editorial-row" id={section.id}>
-          <p class="eyebrow">{section.label}</p>
+          {section.anchors?.map((anchor) => (
+            <span class="case-anchor" id={anchor} aria-hidden="true"></span>
+          ))}
           <div class="body-copy">
             <h2>{section.title}</h2>
-            {(Array.isArray(section.body) ? section.body : [section.body]).map(
-              (paragraph) => (
-                <p>{paragraph}</p>
-              ),
-            )}
-            {section.list && (
-              <ul class="case-list">
-                {section.list.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            )}
-            {section.table && (
-              <table class="case-table">
-                <caption>{section.table.caption}</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Layer</th>
-                    <th scope="col">Responsibility</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {section.table.rows.map((row) => (
-                    <tr>
-                      <th scope="row">{row.layer}</th>
-                      <td>{row.responsibility}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-            {project.slug === "admunos" && section.label === "The system" && (
-              <SystemMap />
-            )}
+            {section.body.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+            {section.diagram && <SystemMap />}
             {i === project.sections.length - 1 && (
               <div class="case-links">
                 {project.link && (

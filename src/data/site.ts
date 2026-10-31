@@ -7,14 +7,10 @@ export const talk = "https://www.youtube.com/watch?v=JCxpD2Mlkg8";
 
 interface CaseSection {
   id?: string;
-  label: string;
+  anchors?: string[];
   title: string;
-  body: string | string[];
-  list?: string[];
-  table?: {
-    caption: string;
-    rows: { layer: string; responsibility: string }[];
-  };
+  body: string[];
+  diagram?: boolean;
 }
 
 interface Project {
@@ -50,7 +46,7 @@ export const projects: Project[] = [
     alt: "TacticLens match studio showing a fictional football match and source-linked match intelligence",
     line: "Beyond the Score. Every Moment Explained.",
     intro:
-      "The same match can mean something different to a fan, an analyst, or someone following one player. I’m building a match studio that makes those perspectives visible, while keeping every explanation tied to the action.",
+      "I had already started working on a football game engine for the browser when I found the Microsoft × Premier League developer hackathon. I realised I could reuse it for something closer to an intelligent broadcast or match-analysis system.",
     role: "Developer · simulation, interface & intelligence",
     stack: "TypeScript / React / Python / Microsoft Foundry",
     contribution:
@@ -65,24 +61,43 @@ export const projects: Project[] = [
     repo: "https://github.com/Cookiesgobrr/tacticlens-live",
     sections: [
       {
-        label: "The question",
-        title: "Can a broadcast show its working?",
-        body: "AI commentary is easy to generate. Making it accountable is the harder part. TacticLens starts with one fictional 11-a-side match: the pitch, clock, score, shots, and explanations all share the same event log.",
+        title: "Why I built it",
+        body: [
+          "TacticLens came from the Microsoft × Premier League developer hackathon. A few days before discovering the challenge, I had already been experimenting with making something similar to a football game that could run in the browser. I’d started working on a match engine.",
+          "When I found the hackathon, I realised I could reuse that engine for something different. Instead of making a football video game, I wanted to make something closer to an intelligent broadcast or match-analysis system.",
+          "The basic idea was that events in a football match, like passes, shots, movement and decisions, could become information that different people could understand differently. A fan might want one explanation. An analyst might want something else. Someone following one player might care about completely different moments. That became TacticLens.",
+        ],
       },
       {
-        label: "The build",
-        title: "One match. Different ways to see it.",
-        body: "The studio offers 2D and 3D views of the same replay, player focus, a shot map, and audience-specific intelligence. Microsoft Foundry agents select, review, and compose evidence for key moments. Independent code checks the facts, and the interface lets you follow an explanation back to its events.",
+        title: "How I built it",
+        body: [
+          "The match engine is written in TypeScript. It simulates a fictional 11-a-side match and uses a seed so the same inputs produce the same match. The pitch, clock, score, statistics and explanations all use a shared event log, with IDs for individual events.",
+          "I built 2D and 3D replay views in React, SVG and Three.js. They show the same simulation frames, so switching views doesn’t mean switching to a different match. The interface includes replay controls, player focus and highlights that link back to the events behind them.",
+          "This was also my first time properly working with Microsoft Azure and Microsoft Foundry. I set up my first Azure account while building this. I was even nervous about putting my credit card into Azure because I’d never set up a cloud account like that before and didn’t fully understand how the charging worked.",
+          "I then had to learn how Azure worked, how to access a model through Foundry, how to send it match information, and how to control what it returned. The Foundry workflow selects, reviews and composes evidence for different audiences. Separate checks in Python and TypeScript verify the facts against the match data.",
+          "The public demo uses precomputed Foundry compositions for selected moments, rather than making a live model call on every click. A deterministic fallback provides explanations when there isn’t an approved composition. I also added exports for the evidence and captions at the current replay time.",
+        ],
       },
       {
-        label: "A deliberate constraint",
-        title: "Evidence before eloquence.",
-        body: "Foundry compositions are precomputed for selected moments. The public replay needs no live model call. A deterministic fallback keeps the match usable when no approved composition is available, and evidence exports preserve the current replay time.",
+        title: "What was difficult",
+        body: [
+          "I initially assumed AI commentary would be one of the easier parts. It wasn’t. Getting a model to produce commentary is easy. Getting it to produce the right commentary consistently was much harder.",
+          "I had to work out how to give it the correct match information and instructions, and how to stop it drifting away from what actually happened. This pushed the project towards having evidence tied to match events rather than simply letting a model freely generate commentary.",
+          "I built most of TacticLens in roughly one to two weeks. That meant I had to make compromises. If I restarted it, I’d spend much more time improving the underlying football simulation, how realistic player movement and decisions are, the AI commentary, and the connection between the simulation and explanations.",
+        ],
       },
       {
-        label: "Where it stands",
-        title: "Playable, inspectable, still developing.",
-        body: "This is a working prototype for Inside the Game: Developer Hackathon, presented by Microsoft and the Premier League. The teams, players, and events are synthetic. The expected-goals model is simplified, and this is not a claim of professional predictive accuracy.",
+        title: "What I learned",
+        body: [
+          "The biggest thing I learned was probably that connecting AI to a system is not simply “send data, get an intelligent answer.” A lot of the work is deciding what information the model receives, what it’s allowed to say, and how you verify that what it says is actually supported by the system.",
+        ],
+      },
+      {
+        title: "Where it stands",
+        body: [
+          "TacticLens is a working prototype for Inside the Game: Developer Hackathon, presented by Microsoft and the Premier League. The demo and source are linked below.",
+          "The teams, players and events are fictional. The simulation simplifies football movement and decisions, and its expected-goals model is a simplified synthetic model. There’s still a lot I’d like to improve, especially in the simulation and commentary.",
+        ],
       },
     ],
   },
@@ -95,9 +110,9 @@ export const projects: Project[] = [
     year: "2026",
     image: "admunos-interface.webp",
     alt: "admunOS staff directory interface showing a fictional Sample Delegate at Test School, with attendance and meal scanner modes",
-    line: "The conference I’m helping run. The system I’m building for it.",
+    line: "A Google Sheets-based system for conference logistics.",
     intro:
-      "I became Director of Logistics for ADMUN 2.7 and needed to connect registration, payment checks, and what happens at the door. I began building admunOS so the same delegate record could connect a verified payment to check-in and meal collection.",
+      "Our logistics team spent a lot of time turning registration spreadsheets into usable delegate records. I wanted to make this easier for everyone, so I started looking into using a Google Sheet as a central database for the conference.",
     role: "Developer · system design, backend & staff interface; Director of Logistics, ADMUN 2.7",
     stack:
       "JavaScript / Google Apps Script / Google Sheets / Netlify Functions",
@@ -114,121 +129,55 @@ export const projects: Project[] = [
     sections: [
       {
         id: "problem",
-        label: "The problem",
-        title: "One delegate, several separate lists.",
+        title: "Why I built it",
         body: [
-          "Becoming Director of Logistics for ADMUN 2.7 meant thinking beyond the registration form. A delegate needs to be registered, have their payment confirmed, receive an identity, enter the right sessions, and collect the right meals. Each step depends on something decided earlier.",
-          "Handling those as separate lists would leave staff reconciling answers at the door. A name on a registration sheet does not prove payment; a badge does not tell a meal desk whether it has already been used. I began building admunOS to connect those decisions around one delegate record.",
-          "The scope is conference operations: importing registrations, reconciling payment records, and giving staff a way to act on the confirmed information. It does not collect or process payments itself.",
+          "Before admunOS, our logistics team received conference registration data from the school IT department as a large Excel sheet. It contained a lot of information in a format that wasn’t particularly useful for conference operations.",
+          "Our team then had to spend a lot of time manually turning that information into something we could actually use: compiling delegate information, creating new spreadsheets, handling allocations and preparing records for the conference. Conference-day operations were also very manual. Food coupons were literally paper coupons that had to be distributed and torn when delegates collected meals.",
+          "I felt that a lot of this could be simplified and digitized. The question I started with was basically: could we use a Google Sheet as one central database for the conference and connect everything else to it?",
+          "As Director of Logistics for ADMUN 2.7, I wanted to make this easier for everyone and reduce the amount of repetitive manual work. Instead of rebuilding delegate spreadsheets every time information arrives, I wanted us to be able to import it and let the system process it into the structure we need.",
         ],
       },
       {
         id: "system",
-        label: "The system",
-        title: "Registration is a starting point, not an admission pass.",
+        anchors: ["payments", "architecture", "staff-workflow"],
+        diagram: true,
+        title: "How I built it",
         body: [
-          "The backend keeps signups and finalized delegates separate. Registration imports enter the signup database without a Delegate ID or QR code. Only a uniquely matched, verified payment promotes a signup into the operational delegate database and issues a permanent ID.",
-          "That ID then connects directory lookup, the badge QR, attendance sessions, and meal records. Reimporting registration data preserves operational fields such as committee allocation and portfolio. A held, cancelled, or refunded payment prevents a new delegate from being finalized; an existing finalized match is retained as withdrawn for audit and hidden from app lookups.",
-          "This separation matters at a desk: staff work from the finalized records, rather than having to interpret an unverified signup or a payment spreadsheet themselves.",
-        ],
-      },
-      {
-        id: "payments",
-        label: "Imports & payment review",
-        title: "A plausible match is not enough.",
-        body: [
-          "The source registration files have different internal and external layouts. The import layer maps them into a common signup structure while retaining the original data in staging. If a populated column is unfamiliar, the system reports it rather than silently discarding its contents.",
-          "Payment matching follows the identifiers available in each source. External payments use the student number against the source registration number. Internal payments use the normalized name and configured school. School GR numbers are informational, not payment-matching or scanner identifiers.",
-          "Ambiguous matches and duplicate payment rows go into a review sheet instead of automatically creating delegates. The import also distinguishes adding information from replacing the current paid list:",
-        ],
-        list: [
-          "Additive import adds or updates verified payments. A delegate is not removed just because they are absent from that file.",
-          "Sync import also removes finalized delegates missing from the verified list and clears their signup payment state. It requires an extra confirmation, and removed Delegate IDs are never reused.",
-        ],
-      },
-      {
-        id: "architecture",
-        label: "The architecture",
-        title: "The phone asks. The backend decides.",
-        body: [
-          "The staff interface is a browser app served over HTTPS so phones can use their cameras. Its requests go through a Netlify Function to Google Apps Script, which owns the record checks and writes in Google Sheets.",
-          "Decoding a QR only supplies an ID. Approval has to come back from the server after the requested attendance or meal action has been checked and recorded.",
-        ],
-        table: {
-          caption: "How a scan moves through admunOS",
-          rows: [
-            {
-              layer: "Staff browser",
-              responsibility:
-                "Reads the QR or manual ID, collects the station and session or meal selection, and displays the server’s result.",
-            },
-            {
-              layer: "Netlify Function",
-              responsibility:
-                "Validates the request, adds the private backend credential on the server, forwards the action, and limits the returned fields.",
-            },
-            {
-              layer: "Google Apps Script",
-              responsibility:
-                "Checks staff access, delegate eligibility, the session or meal, and whether the action has already been recorded. Writes approved records.",
-            },
-            {
-              layer: "Google Sheets",
-              responsibility:
-                "Holds signups, finalized delegates, payment review, configuration, and separate attendance and meal logs.",
-            },
-          ],
-        },
-      },
-      {
-        id: "staff-workflow",
-        label: "At the desk",
-        title: "Give staff an answer they can act on.",
-        body: [
-          "Staff enter an access code, choose attendance or meal mode, select the relevant session or meal, and identify their scanning station. The directory can find finalized delegates by ID, name, school, or committee, with a separate details view.",
-          "Scanning supports the rear camera, a QR image, and manual Delegate ID entry. The manual route stays available when a camera permission, damaged printout, or particular phone gets in the way.",
-          "The interface distinguishes an approval from an already-recorded action, an unknown ID, an inactive or withdrawn delegate, and a connection failure. Duplicate responses include the previous recording time. Text and symbols accompany the visual result, with optional sound and vibration. The browser also prevents overlapping scan requests and briefly pauses repeated QR decoding.",
+          "I started researching how this could work and discovered Google Apps Script. I hadn’t really used Apps Script in this way before. From there, I started experimenting with connecting Google Sheets to scripts and then to a front-end dashboard. I also used Codex while developing the system.",
+          "Google Sheets is the main operational data store. Apps Script handles registration imports, payment reconciliation, permanent delegate IDs, attendance and meals. The staff interface is a browser app served over HTTPS. Its requests go through a Netlify Function to Apps Script, which checks the records and writes back to the Sheet.",
+          "One important part is separating registration from finalized delegates. Imported registrations enter a signup database without a Delegate ID or QR code. A signup only becomes a finalized delegate after its payment record has been uniquely matched and verified. That’s when it receives a permanent ID. Reimporting registration information preserves operational fields such as committee allocation and portfolio.",
+          "The registration files have different internal and external layouts, so the import maps them into a common structure. External payments are matched using the source registration number; internal payments use the normalized name and configured school. Ambiguous matches and duplicate payment rows go into a review sheet. Held, cancelled or refunded payments don’t create new delegates; an existing finalized match is kept as withdrawn for audit and hidden from app lookups.",
+          "Staff enter an access code, choose attendance or meal mode, select the session or meal, and identify their scanning station. They can scan with the rear camera, read a QR image, enter the Delegate ID manually, or use the directory to look someone up. The interface distinguishes an approval from a duplicate, an unknown or inactive delegate, and a connection failure. Reading the QR itself is not approval; that response has to come from the server.",
         ],
       },
       {
         id: "reliability",
-        label: "A technical decision",
-        title: "Two phones. One meal record.",
+        anchors: ["privacy"],
+        title: "What was difficult",
         body: [
-          "A camera cooldown helps on one phone. It cannot stop two desks from scanning the same badge at nearly the same time. I put the duplicate check where the record is written, rather than relying on what an individual browser remembers.",
-          "An attendance record is keyed by Delegate ID plus session; a meal record by Delegate ID plus meal code. The backend takes a script-wide lock, rechecks that key, appends the record, and flushes the write before releasing the lock. If the key already exists, it returns an already-recorded result and the earlier timestamp. The lock is released even when the operation fails.",
-          "The two keys also keep the rules separate. Attending one session should not block another session, and collecting one meal should not block a different meal.",
-          "Connectivity has a deliberate limit. The app caches its static shell, but API responses are not cached and unconfirmed writes are not queued as successful check-ins. A timeout can leave a write’s outcome uncertain; retrying through the same duplicate check can reveal a record that reached the server before the response was lost.",
-          "The documented outage fallback is operational: keep a protected paper record of the ID, time, station, session or meal, and operator. One administrator reconciles it through the normal server workflow once connectivity returns. That procedure still needs to be rehearsed with staff before the event.",
+          "I initially thought about stopping repeated scans in the scanner itself. But that doesn’t solve the case where two different phones scan the same delegate at almost the same time. That’s why the duplicate check happens where the record is written on the backend.",
+          "Attendance uses a key made from the Delegate ID and session. Meals use the Delegate ID and meal code. The backend takes a script-wide lock, checks whether that key already exists, writes the record and flushes it before releasing the lock. A repeated scan returns an already-recorded result with the previous timestamp. Checking in to one session doesn’t block a different session, and collecting one meal doesn’t block another meal.",
+          "I also had to think about what information staff should actually be allowed to see. The QR contains only the Delegate ID, not someone’s name, school, contact details or food preference. Search, scan results and the details view return different sets of fields. Search omits contact and food information; the details view permits selected operational fields, including food preference and mobile number. Payment data, email, school GR numbers and source registration numbers are excluded from that response.",
+          "The Netlify proxy keeps the backend URL and API credential out of the browser’s configuration. Protected actions require the correct, non-empty staff code. The code is held in session storage without persisting delegate records. It’s shared-code access, not individual staff accounts or per-person permissions.",
+          "Another problem is what happens when the internet stops responding. The app caches its static shell, but it doesn’t cache delegate responses or queue unconfirmed writes as successful check-ins. A timeout can also happen after a record has reached the server, so a retry needs to go through the same duplicate check. The fallback procedure is to keep a protected paper record and have one administrator reconcile entries through the normal server workflow when the connection returns.",
         ],
       },
       {
-        id: "privacy",
-        label: "Staff access & privacy",
-        title: "The badge carries an ID, not a profile.",
+        id: "learning",
+        title: "What I learned",
         body: [
-          "The QR contains only the Delegate ID. It does not carry a name, school, contact details, food preference, or credentials. The browser decodes it locally, then requests the information needed for the selected staff action.",
-          "Search, scan results, and delegate details have different allowed fields. Search results omit contact and food information; the details view permits selected operational fields, including food preference and mobile number. Payment data, email, school GR numbers, and source registration numbers are excluded from the staff detail response.",
-          "The Netlify proxy keeps the backend URL and API credential out of browser configuration. Protected actions require a non-empty, correct staff code; the browser keeps that code in session storage without persisting delegate records. This is shared-code staff access, not individual staff accounts or per-person permissions. Station names identify scanning locations, not authenticated staff identities.",
-        ],
-      },
-      {
-        id: "verification",
-        label: "Checking the system",
-        title: "Test the decisions, including the awkward ones.",
-        body: [
-          "The repository includes automated tests for import normalization, payment matching, ambiguous and duplicate rows, mandatory staff access, API validation, response-field filtering, and upstream failures.",
-          "An Apps Script self-check looks for configuration problems, duplicate Delegate IDs, invalid finalized payment states, QR formula issues, and duplicate attendance or meal keys. Controlled demo records include paid and unpaid fictional signups, so the distinction between registration and scanner visibility can be checked without exposing real delegates.",
+          "This project taught me that the visible interface is only a small part of building an operational system. A scanner can look finished while the harder problems are mismatched records, duplicate entries, payment ambiguity, two devices doing something at once, or what happens when the internet stops responding.",
+          "It also taught me how Google Apps Script works and how something as ordinary as a Google Sheet can be used as the centre of a much larger workflow.",
         ],
       },
       {
         id: "status",
-        label: "Where it stands",
-        title: "Built for a conference still ahead.",
+        anchors: ["verification"],
+        title: "Where it stands",
         body: [
-          "admunOS is in development and being prepared for the forthcoming ADMUN 2.7. The repository contains the registration and payment workflow, staff interface, server proxy, and attendance and meal services.",
-          "Preparation still includes testing the actual scanning phones and camera permissions, checking venue Wi-Fi and mobile-data fallback, rehearsing simultaneous scans from two devices, and arranging backups and a recovery procedure. These are the practical checks between implemented code and something staff can depend on at the door.",
-          "The project started with a responsibility I had taken on. Building it has meant following that responsibility through the less visible parts: mismatched records, repeat scans, missing responses, and what someone should do when the screen cannot give them an answer.",
+          "admunOS is in development and being prepared for ADMUN 2.7. The conference is still forthcoming.",
+          "The repository includes automated tests for import normalization, payment matching, ambiguous and duplicate rows, staff access, API validation, response-field filtering and upstream failures. An Apps Script self-check also looks for configuration problems, duplicate IDs, invalid payment states, QR formula issues and duplicate attendance or meal keys. Controlled demo records use fictional signups, including paid and unpaid cases.",
+          "Preparation still includes testing the actual scanning phones and camera permissions, venue Wi-Fi and mobile-data fallback, simultaneous scans from two devices, backups and the fallback procedure.",
         ],
       },
     ],
@@ -244,7 +193,7 @@ export const projects: Project[] = [
     alt: "Original EpilEducate iPad screenshot showing its First Aid learning interface and brain-wave visualization",
     line: "An educational playground about epilepsy, brain activity, and seizure first aid.",
     intro:
-      "My first Swift app is an interactive playground about epilepsy. It brings together explanations, a visualization of brain activity, and a scenario about responding when someone has a seizure.",
+      "This was my first real Swift project. I wanted to make an interactive app that helped people understand epilepsy, brain activity, and what to do if someone has a seizure.",
     role: "Developer · concept, learning experience & Swift app",
     stack: "Swift / SwiftUI / Canvas / SpriteKit",
     contribution:
@@ -259,24 +208,32 @@ export const projects: Project[] = [
     repo: "",
     sections: [
       {
-        label: "The starting point",
-        title: "Understanding through interaction.",
-        body: "I wanted to explore how an app could teach a subject through doing. EpilEducate connects an introduction to epilepsy with visual explanations of EEGs and a first-aid scenario.",
+        title: "Why I built it",
+        body: [
+          "I have epilepsy. I wanted to create something that could help people understand what epilepsy is, what can contribute to seizures, what brain activity can look like, and what someone should do if another person has a seizure. The intention was awareness and education.",
+        ],
       },
       {
-        label: "The experience",
-        title: "From a waveform to a decision.",
-        body: "A SwiftUI Canvas visualizes patterns of brain activity. Interactive controls explore factors such as stress and sleep deprivation, while haptic feedback adds another way to experience the visualization. The simulator turns the first-aid section into a sequence of choices.",
+        title: "Learning Swift",
+        body: [
+          "When I started EpilEducate, my knowledge of Swift, and honestly programming in general, was fairly limited. This project forced me to learn a lot very quickly.",
+          "I spent a lot of time using Gemini as a learning tool while working through Swift, SwiftUI, different frameworks, how views fit together, Canvas, SpriteKit and interactive elements. A major part of the project was me learning how to build it while I was building it.",
+        ],
       },
       {
-        label: "The learning",
-        title: "My first Swift app, end to end.",
-        body: "This project brought interface design, custom drawing, scene-based interaction, and learning content into one playground. The challenge was to make the parts feel like a coherent experience instead of separate demonstrations.",
+        title: "What I built",
+        body: [
+          "I used SwiftUI to put together the learning flow, connecting explanations of epilepsy with interactive exercises. I learned to use Canvas for a brain-wave visualization, added controls to explore triggers, and included haptic feedback alongside the visual experience.",
+          "For the first-aid part, I learned to use SpriteKit to make an interactive scenario. It has a briefing, choices about how to respond when someone has a seizure, and a results screen. That meant working out how to connect a SpriteKit scene to the rest of the SwiftUI app.",
+        ],
       },
       {
-        label: "Where it stands",
-        title: "Submitted for the 2026 challenge.",
-        body: "EpilEducate was submitted to Apple’s 2026 Swift Student Challenge. It is an educational student project, not a clinical tool. Its source and demo are available in the public repository.",
+        title: "The result and what I learned",
+        body: [
+          "I submitted EpilEducate to the 2026 Apple Swift Student Challenge. I wasn’t selected as a winner.",
+          "The project still mattered because it was my first experience building a complete Swift application. I went from knowing very little Swift to being able to build an interactive project with multiple frameworks and submit it.",
+          "I’m now carrying some of what I learned into another Swift project I’m working on. EpilEducate’s source and demo are available in the public repository below.",
+        ],
       },
     ],
   },
