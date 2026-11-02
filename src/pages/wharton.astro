@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { url } from "../data/site";
+---
+<Layout title="Wharton Investment Competition — Tarun Abraham" description="The research, strategy, and team leadership behind Tarun Abraham's Wharton Global High School Investment Competition participation.">
+  <div class="wrap wharton" id="top">
+    <header class="w-hero">
+      <a class="back" href={url("about/#wharton")}>← Back to about</a>
+      <p class="eyebrow">Field notes / Finance & leadership / 2026</p>
+      <h1>Learning to think<br/><em>like an investor.</em></h1>
+      <p class="standfirst">Wharton Global High School Investment Competition</p>
+      <div class="w-deck"><p>I introduced the competition to my school and helped form its first participating team. The challenge wasn't simply choosing stocks. It was learning to build a portfolio around another person's goals.</p></div>
+    </header>
+    <section class="w-facts" aria-label="Project details">
+      <div><span>Role</span><strong>Team lead · investment strategy</strong></div>
+      <div><span>Focus</span><strong>Research, allocation, risk</strong></div>
+      <div><span>Status</span><strong>Competition participation</strong></div>
+    </section>
+    <div class="w-columns">
+      <aside class="w-side"><span>01 / The challenge</span></aside>
+      <section><h2>Invest for a person,<br/>not a leaderboard.</h2><p>Our task was to develop a strategy aligned to a client's investment objectives. That changes the questions you ask: when does the client need the money, how much risk is reasonable, and which holdings actually serve that purpose?</p><p>I helped establish the team, organised our approach to the brief, and worked on investment strategy and stock-selection planning. The work brought together economics, practical financial research, and difficult team decisions.</p></section>
+    </div>
+    <div class="w-principles" aria-label="Portfolio strategy principles">
+      <div><span>01</span><h3>Purpose before picks</h3><p>Start with the client's goals and time horizon, then work backwards to the assets.</p></div>
+      <div><span>02</span><h3>Risk is part of the return</h3><p>Evaluate diversification, concentration, and the trade-off between stability and growth.</p></div>
+      <div><span>03</span><h3>Explain the decision</h3><p>Keep a clear rationale for why an investment belongs in the portfolio—and what might go wrong.</p></div>
+    </div>
+    <div class="w-columns">
+      <aside class="w-side"><span>02 / Decisions</span></aside>
+      <section><h2>Matching assets to milestones.</h2><p>One strand of our work involved using defined-maturity U.S. Treasury ETFs for parts of a planned payout schedule. For example, we purchased IBTO and IBTQ as instruments aligned with 2034 and 2036 target years, because the simulation did not offer suitable individual Treasury bonds for those exact dates.</p><p>These were portfolio construction choices within the competition simulator, not guaranteed returns. Defined-maturity funds still involve market, interest-rate, and implementation risks.</p><p>The wider lesson was that an apparently good investment can still be the wrong investment if it doesn't serve the client.</p></section>
+    </div>
+    <div class="w-columns">
+      <aside class="w-side"><span>03 / Reflection</span></aside>
+      <section><h2>Evidence beats confidence.</h2><p>This experience made me think more carefully about the gap between a persuasive investment idea and a defensible strategy. I learned to look for assumptions, question whether the trade made sense in the context of the full portfolio, and communicate why a decision was made.</p><p>I have deliberately not included a performance ranking, final result, or return figure here because those outcomes have not been independently established.</p></section>
+    </div>
+    <footer class="w-end"><span>Further reading</span><a href={url("academics/")}>My academic record ↗</a><a href={url("about/")}>More about me ↗</a></footer>
+  </div>
+</Layout>
+<style>
+.wharton{padding-bottom:85px}.w-hero{padding:52px 0 70px}.back{font-size:15px;display:inline-block;margin-bottom:52px}.w-hero .eyebrow{font-size:14px;text-transform:uppercase;letter-spacing:.08em}.w-hero h1{font-size:clamp(56px,9vw,105px);line-height:.95;letter-spacing:-.05em;font-weight:500;margin:18px 0 22px}.w-hero h1 em{color:#975b49;font-weight:400}.standfirst{font-size:20px}.w-deck{margin-top:54px;padding-top:24px;border-top:1px solid var(--ink);display:grid;grid-template-columns:1fr 2fr}.w-deck p{grid-column:2;font-size:27px;line-height:1.3}.w-facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.w-facts div{padding:18px 18px 18px 0}.w-facts span{display:block;font-size:13px;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em}.w-facts strong{font-size:18px;font-weight:500}.w-columns{display:grid;grid-template-columns:1fr 2fr;gap:28px;padding:64px 0;border-bottom:1px solid var(--line)}.w-side{color:#8b5646;font-size:16px}.w-columns h2{font-size:clamp(32px,4vw,50px);font-weight:500;line-height:1.08;margin-bottom:25px}.w-columns p{margin:0 0 19px;max-width:660px}.w-principles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:36px 0 56px;border-bottom:1px solid var(--line)}.w-principles>div{background:#eae7df;padding:25px;min-height:260px;display:flex;flex-direction:column}.w-principles span{color:#9b604e;font-size:14px}.w-principles h3{margin-top:auto;margin-bottom:9px;font-weight:500}.w-principles p{font-size:16px;line-height:1.4;color:var(--muted)}.w-end{display:flex;justify-content:space-between;gap:20px;padding:28px 0;flex-wrap:wrap;font-size:16px}.w-end span{color:var(--muted)}@media(max-width:680px){.w-hero{padding:32px 0 48px}.w-hero h1{font-size:clamp(48px,12vw,70px)}.w-deck{display:block;margin-top:35px}.w-deck p{font-size:23px}.w-facts{grid-template-columns:1fr}.w-facts div{border-bottom:1px solid var(--line)}.w-columns{grid-template-columns:1fr;padding:38px 0;gap:14px}.w-principles{grid-template-columns:1fr}.w-principles>div{min-height:180px}}
+</style>

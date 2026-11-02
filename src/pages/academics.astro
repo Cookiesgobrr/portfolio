@@ -1,0 +1,197 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { credentials } from "../data/credentials";
+import { url } from "../data/site";
+const subjects = [
+  { name: "First Language English", grade: "A*" },
+  { name: "Mathematics", grade: "A*" },
+  { name: "Computer Science", grade: "A*" },
+  { name: "Physics", grade: "A" },
+  { name: "Chemistry", grade: "A" },
+  { name: "Accounting", grade: "A" },
+  { name: "Economics", grade: "A" },
+  { name: "Business Studies", grade: "A" },
+];
+---
+<Layout
+  title="Academics & Credentials — Tarun Abraham"
+  description="Tarun Abraham's academic record, A Level subjects, 2025 IGCSE results, and individually linked professional learning credentials."
+>
+  <div class="wrap academics-page" id="top">
+    <section class="academics-hero" aria-labelledby="academics-title">
+      <p class="eyebrow">A record of learning / 01—08</p>
+      <div class="hero-rule">
+        <h1 id="academics-title">The things I've<br /><em>studied.</em></h1>
+        <div class="hero-aside">
+          <span class="academic-seal" aria-hidden="true">TA<br />26</span>
+          <p>School, independent study, and the questions that led me from theory to building.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="academic-section" id="education">
+      <div class="section-index"><span>01</span><h2>Formal education</h2></div>
+      <div class="academic-main">
+        <div class="school-heading">
+          <div>
+            <h3>Al Diyafah High School</h3>
+            <p>Dubai, United Arab Emirates</p>
+          </div>
+          <span>Graduating 2027</span>
+        </div>
+        <div class="level-block">
+          <p class="eyebrow">Currently studying · A Levels</p>
+          <div class="level-subjects">
+            <span>Mathematics</span><span>Economics</span><span>Accounting</span>
+          </div>
+        </div>
+        <div class="igcse-topline">
+          <div>
+            <p class="eyebrow">2025 IGCSE examinations</p>
+            <h3>Eight subjects. Eight top grades.</h3>
+            <p class="academic-note">Recognised by my school for Excellent Academic Achievement.</p>
+          </div>
+          <div class="grade-summary" aria-label="Three A-star grades and five A grades">
+            <strong>3<small>A*</small></strong><i>+</i><strong>5<small>A</small></strong>
+          </div>
+        </div>
+        <div class="subject-list" aria-label="2025 IGCSE results">
+          {subjects.map((subject, index) => (
+            <div class="subject-row">
+              <span class="subject-number">{String(index + 1).padStart(2, "0")}</span>
+              <span>{subject.name}</span>
+              <strong>{subject.grade}</strong>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="academic-section certificates-section" id="credentials">
+      <div class="section-index"><span>02</span><h2>Credentials</h2></div>
+      <div class="academic-main">
+        <div class="section-copy">
+          <h3>Learning beyond the classroom.</h3>
+          <p>Short courses, digital badges, and virtual workplace simulations. Select a credential to open its original verification page or issuer-hosted certificate.</p>
+        </div>
+        <div class="credentials-grid">
+          {credentials.map((cert, index) => (
+            <article class="credential-shell">
+              {cert.verification ? (
+                <a class="credential-tile" href={cert.verification} target="_blank" rel="noopener noreferrer" aria-label={cert.proofLabel + ": " + cert.name + ", " + cert.issuer}>
+                  <div class="tile-top">
+                    <span class="credential-index">{String(index + 1).padStart(2, "0")} / 08</span>
+                    <span class="credential-kind">{cert.kind}</span>
+                  </div>
+                  <div class="tile-center">
+                    <span class="tile-monogram" aria-hidden="true">{cert.issuer.startsWith("IBM") ? "IBM" : cert.issuer.startsWith("Cisco") ? "C" : cert.issuer.startsWith("Google") ? "G" : cert.issuer.startsWith("Mastercard") ? "M" : "GS"}</span>
+                    <h4>{cert.name}</h4>
+                    <p class="tile-issuer">{cert.issuer}</p>
+                  </div>
+                  <div class="tile-foot">
+                    <span>{cert.date}</span>
+                    <span class="verify">{cert.proofLabel} ↗</span>
+                  </div>
+                </a>
+              ) : (
+                <div class="credential-tile unverified">
+                  <div class="tile-top">
+                    <span class="credential-index">{String(index + 1).padStart(2, "0")} / 08</span>
+                    <span class="credential-kind">{cert.kind}</span>
+                  </div>
+                  <div class="tile-center">
+                    <span class="tile-monogram" aria-hidden="true">IBM</span>
+                    <h4>{cert.name}</h4>
+                    <p class="tile-issuer">{cert.issuer}</p>
+                  </div>
+                  <div class="tile-foot">
+                    <span>{cert.date}</span>
+                    <span class="unverified-status">{cert.proofLabel}</span>
+                  </div>
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+        <p class="credential-note">Virtual job simulations are learning experiences completed through Forage, not employment with the named companies. One older IBM badge has no confirmed individual verification URL yet; its tile is deliberately not linked to an unrelated certificate.</p>
+      </div>
+    </section>
+
+    <section class="academic-section academic-outro">
+      <div class="section-index"><span>03</span><h2>Putting it to work</h2></div>
+      <div class="academic-main">
+        <p class="outro-lead">I find the most useful lessons happen when I try to make something with what I've learned.</p>
+        <div class="academic-related">
+          <a href={url("work/tacticlens/")}><span>Technology meets evidence</span><strong>TacticLens Live ↗</strong></a>
+          <a href={url("work/admunos/")}><span>Systems meet real people</span><strong>admunOS ↗</strong></a>
+          <a href={url("work/epileducate/")}><span>Learning a new language</span><strong>EpilEducate ↗</strong></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .academics-page{padding-bottom:84px}
+  .academics-hero{padding:72px 0 76px}
+  .academics-hero .eyebrow{letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+  .hero-rule{border-top:1px solid var(--ink);margin-top:20px;padding-top:28px;display:grid;grid-template-columns:minmax(0,2fr) minmax(200px,1fr);gap:45px;align-items:end}
+  .academics-hero h1{font-size:clamp(64px,9vw,113px);font-weight:500;line-height:.93;letter-spacing:-.055em}
+  .academics-hero h1 em{font-weight:400;font-style:italic;color:#8c5644}
+  .hero-aside{max-width:220px;justify-self:end}
+  .hero-aside p{font-size:16px;line-height:1.45;margin-top:18px;color:var(--muted)}
+  .academic-seal{width:58px;height:58px;border:1px solid var(--ink);border-radius:100%;display:grid;place-content:center;font-size:14px;text-align:center;line-height:1.05;transform:rotate(-12deg)}
+  .academic-section{display:grid;grid-template-columns:205px minmax(0,1fr);gap:40px;padding:48px 0 65px;border-top:1px solid var(--line)}
+  .section-index{display:flex;gap:17px;align-items:baseline}
+  .section-index span{font-size:14px;color:#8c5644}
+  .section-index h2{font-size:20px}
+  .school-heading{display:flex;justify-content:space-between;align-items:start;gap:24px}
+  .school-heading h3{font-size:31px;font-weight:500}
+  .school-heading p,.school-heading>span{color:var(--muted);font-size:16px}
+  .level-block{margin-top:35px}
+  .level-block .eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+  .level-subjects{display:flex;flex-wrap:wrap;gap:9px}
+  .level-subjects span{border:1px solid var(--line);padding:6px 14px;font-size:17px}
+  .igcse-topline{border-top:1px solid var(--line);padding-top:34px;margin-top:40px;display:flex;align-items:end;justify-content:space-between;gap:24px}
+  .igcse-topline .eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+  .igcse-topline h3{font-weight:500;font-size:28px}
+  .academic-note{font-size:16px;color:var(--muted);margin-top:6px}
+  .grade-summary{display:flex;align-items:baseline;gap:10px;white-space:nowrap}
+  .grade-summary strong{font-size:49px;font-weight:500;line-height:1}
+  .grade-summary small{font-size:21px;margin-left:3px}
+  .grade-summary i{font-size:25px;font-style:normal;color:var(--muted)}
+  .subject-list{margin-top:21px}
+  .subject-row{display:grid;grid-template-columns:38px 1fr 52px;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--line);font-size:18px}
+  .subject-row:last-child{border-bottom:1px solid var(--line)}
+  .subject-row strong{text-align:right;font-size:21px;font-weight:600}
+  .subject-number{font-size:13px;color:var(--muted)}
+  .section-copy{max-width:600px;margin-bottom:31px}
+  .section-copy h3{font-weight:500;font-size:33px}
+  .section-copy p{font-size:18px;color:var(--muted);margin-top:9px}
+  .credentials-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+  .credential-shell{min-width:0}
+  .credential-tile{min-height:252px;padding:18px 20px 16px;border:1px solid #c3c0b7;background:#eeece5;color:var(--ink);display:flex;flex-direction:column;justify-content:space-between;text-decoration:none;transition:transform .18s ease,border-color .18s ease,background .18s ease}
+  a.credential-tile:hover{color:var(--ink);transform:translateY(-3px);border-color:var(--ink);background:#f7f5ee}
+  a.credential-tile:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+  .tile-top,.tile-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;line-height:1.3;color:var(--muted)}
+  .credential-index{font-variant-numeric:tabular-nums}
+  .credential-kind{text-transform:uppercase;letter-spacing:.07em;font-size:11px}
+  .tile-center{padding:18px 0 15px}
+  .tile-monogram{display:inline-flex;align-items:center;justify-content:center;width:49px;height:49px;border:1px solid #9a9487;border-radius:50%;font-size:17px;letter-spacing:-.04em;margin-bottom:17px}
+  .tile-center h4{font-size:23px;font-weight:500;line-height:1.2;letter-spacing:-.015em}
+  .tile-issuer{font-size:16px;color:var(--muted);margin-top:4px}
+  .tile-foot{border-top:1px solid var(--line);padding-top:12px;align-items:end}
+  .verify{color:#844333;text-align:right}
+  .unverified{opacity:.76}
+  .unverified-status{font-style:italic;text-align:right}
+  .credential-note{font-size:15px;line-height:1.45;margin-top:19px;color:var(--muted)}
+  .outro-lead{font-size:30px;line-height:1.2;max-width:600px}
+  .academic-related{margin-top:28px}
+  .academic-related a{display:flex;justify-content:space-between;gap:20px;padding:15px 0;border-top:1px solid var(--line);font-size:17px;text-decoration:none}
+  .academic-related a:last-child{border-bottom:1px solid var(--line)}
+  .academic-related a span{color:var(--muted)}
+  .academic-related a strong{font-weight:500}
+  @media(max-width:760px){.academic-section{grid-template-columns:1fr;gap:24px}.academics-hero{padding-block:44px}.hero-rule{gap:18px}.academics-hero h1{font-size:clamp(50px,11vw,82px)}.hero-aside p{font-size:14px}.academic-section{padding:36px 0 46px}}
+  @media(max-width:530px){.hero-rule{grid-template-columns:1fr}.hero-aside{justify-self:start;display:flex;align-items:center;gap:14px;max-width:none}.hero-aside p{margin:0}.academic-seal{flex-shrink:0}.school-heading{flex-direction:column;gap:8px}.igcse-topline{align-items:start;flex-direction:column}.credentials-grid{grid-template-columns:1fr}.credential-tile{min-height:232px}.academic-related a{display:block}.academic-related a strong{display:block;margin-top:4px}}
+  @media(prefers-reduced-motion:reduce){.credential-tile{transition:none}a.credential-tile:hover{transform:none}}
+</style>
