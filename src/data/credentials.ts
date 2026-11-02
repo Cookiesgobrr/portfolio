@@ -60,7 +60,7 @@ export const credentials: Credential[] = [
     date: "March 2023",
     discipline: "Artificial intelligence",
     kind: "Badge",
-    verification: "https://www.credly.com/badges/7dbc5728-9358-4226-aa91-81cf464d39ba",
+    verification: "https://www.credly.com/badges/7dbc5728-9358-4226-aa91-81cf464d39ba/public_url",
     proofLabel: "Verify digital badge",
   },
   {
