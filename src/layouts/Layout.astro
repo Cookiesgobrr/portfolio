@@ -59,6 +59,12 @@ const active = Astro.url.pathname;
           About
         </a>
         <a
+          href={url("academics/")}
+          aria-current={active.includes("/academics") ? "page" : undefined}
+        >
+          Academics
+        </a>
+        <a
           href={url("lab/")}
           aria-current={active.includes("/lab") ? "page" : undefined}
         >
