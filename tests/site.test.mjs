@@ -146,3 +146,15 @@ test("repository stays minimal and unreleased work stays unpublished", () => {
     );
   }
 });
+
+
+test("academic archive includes all grades, linked credentials, and a standalone Wharton story", () => {
+  const academics = readFileSync("dist/academics/index.html", "utf8");
+  assert.equal((academics.match(/class="subject-row"/g) || []).length, 8);
+  assert.equal((academics.match(/class="credential-shell"/g) || []).length, 8);
+  assert.match(academics, /Goldman Sachs/);
+  assert.match(academics, /Mastercard/);
+  assert.match(academics, /IBM SkillsBuild/);
+  assert.match(readFileSync("dist/wharton/index.html", "utf8"), /Wharton Global High School Investment Competition/);
+  assert.match(readFileSync("dist/about/index.html", "utf8"), /Brainstormers \/ Peter Jones Tycoon · Year 6/);
+});
