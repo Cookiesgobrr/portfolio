@@ -42,8 +42,8 @@ export const credentials: Credential[] = [
     date: "August 2023",
     discipline: "Emerging technologies",
     kind: "Badge",
-    verification: null,
-    proofLabel: "Verification link being checked",
+    verification: "https://www.credly.com/org/ibm-skillsbuild/badge/explore-emerging-tech.1",
+    proofLabel: "View issuer badge description",
   },
   {
     name: "Cybersecurity Job Simulation",
