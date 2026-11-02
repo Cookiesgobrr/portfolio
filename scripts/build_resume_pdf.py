@@ -89,7 +89,7 @@ certifications = [
     ("Cisco - Introduction to Cybersecurity", "Cisco Networking Academy", "Dec 2023", "Cybersecurity, network security", "", "https://www.credly.com/badges/6589aea4-ced8-4ece-a129-be3112ffd6d6", "Verify"),
     ("IBM - Explore Emerging Tech", "IBM SkillsBuild", "Aug 2023", "Emerging technologies", "", "https://www.credly.com/org/ibm-skillsbuild/badge/explore-emerging-tech.1", "Issuer description"),
     ("Mastercard - Cybersecurity Job Simulation", "Forage", "Jun 2023", "Cybersecurity, network security", "oPmvTjDPrSyPB6gtp", "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/mastercard/vcKAB5yYAgvemepGQ_Mastercard_9R7jx3kHJqRRK8Eab_1688117718463_completion_certificate.pdf", "Certificate"),
-    ("IBM - AI Foundations", "IBM SkillsBuild", "Mar 2023", "Artificial intelligence", "", "https://www.credly.com/badges/7dbc5728-9358-4226-aa91-81cf464d39ba", "Verify"),
+    ("IBM - AI Foundations", "IBM SkillsBuild", "Mar 2023", "Artificial intelligence", "", "https://www.credly.com/badges/7dbc5728-9358-4226-aa91-81cf464d39ba/public_url", "Verify"),
     ("IBM - Cybersecurity Fundamentals", "IBM SkillsBuild", "Apr 2022", "Cybersecurity", "", "https://www.credly.com/badges/c14140ff-cd5c-4175-a898-7fb6ec05991c", "Verify"),
     ("IBM - Working in a Digital World: Professional Skills", "IBM SkillsBuild", "Feb 2022", "Digital communication", "", "https://www.credly.com/badges/2bbefb4d-d10b-407d-badd-aa408749eb9f", "Verify"),
 ]
